@@ -15,6 +15,38 @@ const competitions = [
   {id:'musicalChairs', name:'Musical Chairs', date:'23 Sept'}
 ];
 
+const eventDetailConfig = {
+  shlok: [
+    {key:'speechType', label:'Presentation'},
+    {key:'speechDuration', label:'Duration'}
+  ],
+  foodStall: [
+    {key:'foodStallName', label:'Stall / Display Name'},
+    {key:'foodCategory', label:'Food Category'},
+    {key:'foodItems', label:'Items to Sell / Serve'}
+  ],
+  talentJunior: [
+    {key:'talentCategory', label:'Performance Category'},
+    {key:'participationType', label:'Participation Type'},
+    {key:'performanceName', label:'Performance / Act'},
+    {key:'performanceDuration', label:'Duration'},
+    {key:'groupMembers', label:'Group Members'},
+    {key:'specialRequirement', label:'Special Requirement'}
+  ],
+  talentSenior: [
+    {key:'talentCategory', label:'Performance Category'},
+    {key:'participationType', label:'Participation Type'},
+    {key:'performanceName', label:'Performance / Act'},
+    {key:'performanceDuration', label:'Duration'},
+    {key:'groupMembers', label:'Group Members'},
+    {key:'specialRequirement', label:'Special Requirement'}
+  ],
+  cricket: [{key:'sportsTeamDetails', label:'Team / Partner Details'}],
+  football: [{key:'sportsTeamDetails', label:'Team / Partner Details'}],
+  sackRace: [{key:'sportsTeamDetails', label:'Team / Partner Details'}],
+  lemonSpoon: [{key:'sportsTeamDetails', label:'Team / Partner Details'}]
+};
+
 const $ = id => document.getElementById(id);
 let session = null;
 let allRows = [];
@@ -84,6 +116,9 @@ function populateEventFilter(){
   const current=$('eventFilter').value;
   $('eventFilter').innerHTML='<option value="">All events</option>'+competitions.map(c=>`<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('');
   $('eventFilter').value=current;
+  if($('reportEvent') && $('reportEvent').options.length<=1){
+    $('reportEvent').innerHTML='<option value="">Select an event</option>'+competitions.map(c=>`<option value="${c.id}">${escapeHtml(c.name)} — ${c.date}</option>`).join('');
+  }
 }
 
 function applyFilters(){
@@ -124,11 +159,35 @@ function renderRows(){
   document.querySelectorAll('.edit-btn').forEach(b=>b.addEventListener('click',()=>openEdit(b.dataset.id)));
 }
 
+function renderEditDynamicQuestions(details={}){
+  const f=$('editForm');
+  const ids=[...f.querySelectorAll('input[name="editEvent"]:checked')].map(x=>x.value);
+  const blocks=[];
+  if(ids.includes('shlok')) blocks.push(`<div class="admin-detail-block"><h4>📖 Ganesh Shlok / Poem / Short Speech</h4><div class="form-grid"><label>What will be presented?<select name="speechType"><option value="">Select</option><option>Ganesh Shlok</option><option>Poem</option><option>Short Speech</option></select></label><label>Approx. duration<input name="speechDuration" placeholder="e.g. 2 minutes" /></label></div></div>`);
+  if(ids.includes('talentJunior') || ids.includes('talentSenior')) blocks.push(`<div class="admin-detail-block"><h4>🎭 MiCasaa Got Talent</h4><div class="form-grid"><label>Performance category<select name="talentCategory"><option value="">Select</option><option>Dance</option><option>Singing</option><option>Drama</option><option>Skit</option><option>Instrumental Music</option><option>Other</option></select></label><label>Participation type<select name="participationType"><option value="">Select</option><option>Solo</option><option>Duo</option><option>Group</option></select></label><label>Performance / act name<input name="performanceName" /></label><label>Approx. duration<input name="performanceDuration" /></label><label class="full">Group member names<textarea name="groupMembers"></textarea></label><label class="full">Special requirement<textarea name="specialRequirement"></textarea></label></div></div>`);
+  if(ids.some(id=>['cricket','football','sackRace','lemonSpoon'].includes(id))) blocks.push(`<div class="admin-detail-block"><h4>🏅 Sports Day</h4><label>Team / partner details<textarea name="sportsTeamDetails"></textarea></label></div>`);
+  if(ids.includes('foodStall')) blocks.push(`<div class="admin-detail-block"><h4>🍽️ Food Stall</h4><div class="form-grid"><label>Stall / Display Name<input name="foodStallName" /></label><label>Food Category<select name="foodCategory"><option value="">Select</option><option>Snacks</option><option>Chaat</option><option>Main Course</option><option>Dessert / Sweets</option><option>Beverages</option><option>Healthy / Homemade</option><option>Other</option></select></label><label class="full">Items to sell / serve<textarea name="foodItems"></textarea></label></div><div class="admin-note"><strong>Note:</strong> Participants arrange their own table and power/electrical requirements.</div></div>`);
+  blocks.push(`<div class="admin-detail-block"><h4>📝 Committee Notes</h4><label>Notes<textarea name="notes"></textarea></label></div>`);
+  $('editDynamicQuestions').innerHTML=blocks.join('');
+  for(const [key,value] of Object.entries(details||{})){
+    const el=f.elements[key]; if(el && value!==null && value!==undefined) el.value=value;
+  }
+}
+
+function collectAdminDetails(){
+  const names=['speechType','speechDuration','talentCategory','participationType','performanceName','performanceDuration','groupMembers','specialRequirement','sportsTeamDetails','foodStallName','foodCategory','foodItems','notes'];
+  const d={}; const f=$('editForm');
+  names.forEach(name=>{const el=f.elements[name]; if(el && String(el.value||'').trim()!=='') d[name]=String(el.value).trim();});
+  return d;
+}
+
 function openEdit(id){
   const r=allRows.find(x=>x.id===id); if(!r)return;
   const f=$('editForm'); f.elements.id.value=r.id; f.elements.participantName.value=r.participant_name; f.elements.flatNumber.value=r.flat_number; f.elements.wing.value=r.wing; f.elements.mobile.value=r.mobile; f.elements.age.value=r.age; f.elements.ageGroup.value=r.age_group; f.elements.guardianName.value=r.guardian_name||''; f.elements.photoConsent.checked=!!r.photo_consent;
   $('editRegistrationCode').textContent=`${r.registration_code} · Last updated ${fmtDate(r.updated_at)}`;
   $('editEvents').innerHTML=competitions.map(c=>`<label class="event-check"><input type="checkbox" name="editEvent" value="${c.id}" ${(r.event_ids||[]).includes(c.id)?'checked':''}><span><strong>${escapeHtml(c.name)}</strong><br><small>${c.date}</small></span></label>`).join('');
+  $('editEvents').querySelectorAll('input[name="editEvent"]').forEach(el=>el.addEventListener('change',()=>renderEditDynamicQuestions(collectAdminDetails())));
+  renderEditDynamicQuestions(r.details||{});
   $('editError').hidden=true; $('editModal').hidden=false;
 }
 function closeEdit(){ $('editModal').hidden=true; }
@@ -138,9 +197,65 @@ $('editForm').addEventListener('submit',async e=>{
   e.preventDefault(); const f=e.currentTarget; const ids=[...f.querySelectorAll('input[name="editEvent"]:checked')].map(x=>x.value);
   if(!ids.length){$('editError').textContent='Select at least one competition.';$('editError').hidden=false;return}
   const current=allRows.find(r=>r.id===f.elements.id.value);
-  const payload={participantName:f.elements.participantName.value.trim(),flatNumber:f.elements.flatNumber.value.trim(),wing:f.elements.wing.value,age:Number(f.elements.age.value),ageGroup:f.elements.ageGroup.value,guardianName:f.elements.guardianName.value.trim(),mobile:f.elements.mobile.value.trim(),eventIds:ids,events:ids.map(id=>competitions.find(c=>c.id===id)?.name||id),details:current?.details||{},photoConsent:f.elements.photoConsent.checked};
+  const payload={participantName:f.elements.participantName.value.trim(),flatNumber:f.elements.flatNumber.value.trim(),wing:f.elements.wing.value,age:Number(f.elements.age.value),ageGroup:f.elements.ageGroup.value,guardianName:f.elements.guardianName.value.trim(),mobile:f.elements.mobile.value.trim(),eventIds:ids,events:ids.map(id=>competitions.find(c=>c.id===id)?.name||id),details:collectAdminDetails(),photoConsent:f.elements.photoConsent.checked};
   try{ await rpc('admin_update_registration',{p_id:f.elements.id.value,p_payload:payload}); closeEdit(); await loadRegistrations(); }
   catch(err){$('editError').textContent=`Could not save changes: ${err.message}`;$('editError').hidden=false}
+});
+
+
+function eventRows(eventId){
+  return allRows.filter(r=>(r.event_ids||[]).includes(eventId)).sort((a,b)=>{
+    const wing=String(a.wing||'').localeCompare(String(b.wing||'')); if(wing) return wing;
+    const na=parseInt(a.flat_number,10), nb=parseInt(b.flat_number,10);
+    if(!Number.isNaN(na)&&!Number.isNaN(nb)&&na!==nb) return na-nb;
+    const flat=String(a.flat_number||'').localeCompare(String(b.flat_number||''),undefined,{numeric:true}); if(flat) return flat;
+    return String(a.participant_name||'').localeCompare(String(b.participant_name||''));
+  });
+}
+
+function reportColumns(eventId){
+  const cols=[
+    {label:'Sr.', get:(r,i)=>i+1, cls:'narrow'},
+    {label:'Participant', get:r=>`${r.participant_name||''}${r.registration_code?`\nID: ${r.registration_code}`:''}${r.guardian_name?`\nGuardian: ${r.guardian_name}`:''}`},
+    {label:'Flat', get:r=>`${r.wing||''}-${r.flat_number||''}`, cls:'compact'},
+    {label:'Age', get:r=>`${r.age||''}${r.age_group?`\n${r.age_group}`:''}`, cls:'compact'},
+    {label:'Mobile', get:r=>r.mobile||'', cls:'compact'}
+  ];
+  (eventDetailConfig[eventId]||[]).forEach(c=>cols.push({label:c.label,get:r=>(r.details||{})[c.key]||''}));
+  cols.push({label:'Notes', get:r=>(r.details||{}).notes||''});
+  return cols;
+}
+
+function generatePrintableReport(){
+  const eventId=$('reportEvent').value;
+  if(!eventId){ alert('Please select an event first.'); return; }
+  const event=competitions.find(c=>c.id===eventId); if(!event)return;
+  const rows=eventRows(eventId); const cols=reportColumns(eventId);
+  $('reportModalHeading').textContent=`${event.name} — Printable Report`;
+  $('printEventName').textContent=event.name;
+  $('printEventDate').textContent=event.date + ' 2026';
+  $('printGeneratedAt').textContent=`Generated ${new Date().toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}`;
+  $('printTotal').textContent=`Total Registrations: ${rows.length}`;
+  $('printReportTable').querySelector('thead').innerHTML=`<tr>${cols.map(c=>`<th class="${c.cls||''}">${escapeHtml(c.label)}</th>`).join('')}</tr>`;
+  $('printReportTable').querySelector('tbody').innerHTML=rows.map((r,i)=>`<tr>${cols.map(c=>`<td class="${c.cls||''}">${escapeHtml(c.get(r,i)).replace(/\n/g,'<br>')}</td>`).join('')}</tr>`).join('');
+  $('printEmpty').hidden=rows.length!==0;
+  $('printReportTable').hidden=rows.length===0;
+  $('reportModal').dataset.eventId=eventId;
+  $('reportModal').hidden=false;
+}
+
+function closeReport(){ $('reportModal').hidden=true; }
+$('generateReportBtn').addEventListener('click',generatePrintableReport);
+$('closeReport').addEventListener('click',closeReport);
+$('reportModal').addEventListener('click',e=>{if(e.target.id==='reportModal')closeReport()});
+$('printReportBtn').addEventListener('click',()=>window.print());
+
+$('exportEventCsvBtn').addEventListener('click',()=>{
+  const eventId=$('reportModal').dataset.eventId; const event=competitions.find(c=>c.id===eventId); if(!event)return;
+  const rows=eventRows(eventId), cols=reportColumns(eventId);
+  const csv=[[...cols.map(c=>c.label)],...rows.map((r,i)=>cols.map(c=>c.get(r,i)))]
+    .map(row=>row.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\r\n');
+  const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`MiCasaa-${event.name.replace(/[^a-z0-9]+/gi,'-')}-${new Date().toISOString().slice(0,10)}.csv`; document.body.appendChild(a); a.click(); const url=a.href; a.remove(); URL.revokeObjectURL(url);
 });
 
 $('exportBtn').addEventListener('click',()=>{

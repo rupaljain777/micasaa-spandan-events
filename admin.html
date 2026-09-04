@@ -54,6 +54,17 @@
         <div id="eventSummary" class="event-summary"></div>
       </section>
 
+
+      <section class="panel report-panel">
+        <div class="panel-head">
+          <div><div class="eyebrow">Paper-ready lists</div><h2>Event-wise Printable Report</h2><p class="panel-note">Choose an event to generate a clean participant list with the event-specific registration details.</p></div>
+        </div>
+        <div class="report-controls">
+          <label>Event<select id="reportEvent"><option value="">Select an event</option></select></label>
+          <button id="generateReportBtn" class="primary-btn">🖨 Generate Printable Report</button>
+        </div>
+      </section>
+
       <section class="panel">
         <div class="panel-head"><div><div class="eyebrow">Participants</div><h2>Registration List</h2></div><div id="resultCount" class="result-count"></div></div>
         <div class="filters">
@@ -90,10 +101,43 @@
           <label class="full">Parent / Guardian<input name="guardianName" /></label>
         </div>
         <fieldset><legend>Competition(s)</legend><div id="editEvents" class="edit-events"></div></fieldset>
+        <fieldset id="editDetailsFieldset"><legend>Event-specific details</legend><div id="editDynamicQuestions"></div></fieldset>
         <label class="check-row"><input name="photoConsent" type="checkbox" /> Photo/video consent</label>
         <div id="editError" class="message error" hidden></div>
         <div class="modal-actions"><button type="button" id="cancelEdit" class="ghost-btn">Cancel</button><button type="submit" class="primary-btn">Save Changes</button></div>
       </form>
+    </div>
+  </div>
+
+
+  <div id="reportModal" class="modal report-modal" hidden>
+    <div class="modal-card report-modal-card">
+      <div class="modal-head no-print">
+        <div><div class="eyebrow">Event-wise report</div><h2 id="reportModalHeading">Printable Participant List</h2><p>Use Print / Save as PDF from your browser.</p></div>
+        <button id="closeReport" class="icon-btn">×</button>
+      </div>
+      <div class="report-actions no-print">
+        <button id="printReportBtn" class="primary-btn">🖨 Print / Save PDF</button>
+        <button id="exportEventCsvBtn" class="ghost-btn">⬇ Export this event CSV</button>
+      </div>
+      <section id="printableReport" class="printable-report">
+        <div class="print-report-header">
+          <div>
+            <div class="print-brand">MiCasaa</div>
+            <h1>Ganesh Utsav 2026</h1>
+            <p>Micasaa Spandan Committee</p>
+          </div>
+          <div class="print-event-meta">
+            <h2 id="printEventName"></h2>
+            <strong id="printEventDate"></strong>
+            <span id="printGeneratedAt"></span>
+          </div>
+        </div>
+        <div class="print-summary"><strong id="printTotal"></strong><span>Event-wise participant registration list</span></div>
+        <div class="print-table-wrap"><table id="printReportTable" class="print-report-table"><thead></thead><tbody></tbody></table></div>
+        <div id="printEmpty" class="empty-state" hidden>No registrations found for this event.</div>
+        <div class="print-footer"><span>Prepared by Micasaa Spandan Committee</span><span>Ganpati Bappa Morya! 🙏</span></div>
+      </section>
     </div>
   </div>
 

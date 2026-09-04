@@ -201,3 +201,21 @@ The registrations table stays unavailable to anonymous visitors. The public regi
 
 ## Food Stall registration
 Food Stall registration is included for 16 Sept. Residents can provide stall name, category, and planned items. The form also clearly notes that participants must arrange their own table and any power/electrical requirements. The admin dashboard can filter and count Food Stall registrations.
+
+## Event-wise Printable Reports
+The Admin Dashboard now includes **Event-wise Printable Report**.
+
+1. Sign in to `admin.html`.
+2. Under **Event-wise Printable Report**, choose an event.
+3. Click **Generate Printable Report**.
+4. The report automatically includes participant details plus event-specific fields:
+   - Ganesh Shlok / Poem / Speech: presentation type and duration
+   - MiCasaa Got Talent: category, solo/duo/group, act name, duration, group members and special requirements
+   - Sports: team / partner details
+   - Food Stall: stall name, food category and items to sell / serve
+   - Other competitions: participant details and notes
+5. Click **Print / Save PDF** for a paper-ready landscape report, or **Export this event CSV** for Excel.
+
+The admin Edit Registration screen also exposes these event-specific fields, so committee members can correct them when required.
+
+No additional Supabase SQL change is required for this report feature; it uses the existing admin registration RPC.
