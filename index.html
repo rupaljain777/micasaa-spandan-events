@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#7f1237" />
+  <title>MiCasaa Ganesh Utsav 2026 — Competition Registration</title>
+  <meta name="description" content="Register for MiCasaa Ganesh Utsav 2026 competitions and activities organised by Micasaa Spandan Committee." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="top-garland" aria-hidden="true">
+    <span>✿</span><span>✿</span><span>✿</span><span>✿</span><span>✿</span><span>✿</span><span>✿</span><span>✿</span>
+  </div>
+
+  <header class="site-header">
+    <div class="brand-wrap">
+      <img src="assets/micasaa-logo.png" alt="MiCasaa Green Lifestyle" class="logo" />
+      <div class="committee">Micasaa Spandan Committee</div>
+    </div>
+    <div class="header-actions">
+      <a class="ghost-btn" href="#schedule">View Schedule</a>
+      <a class="ghost-btn" href="admin.html">Committee Admin</a>
+      <a class="primary-btn" href="#register">Register Now</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">14–25 September 2026 · 12 Days of Celebration</div>
+        <h1>Ganesh Utsav <span>Competition Registration</span></h1>
+        <p class="hero-text">A celebration of devotion, creativity, talent, sport and togetherness — right here at MiCasaa.</p>
+        <div class="hero-badges">
+          <span>🎨 Creative</span><span>🎤 Talent</span><span>🏏 Sports</span><span>🍲 Culinary</span>
+        </div>
+        <div class="hero-cta">
+          <a class="primary-btn large" href="#register">Register for Competitions</a>
+          <div class="microcopy">One form · Multiple events · Mobile friendly</div>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="mandala"></div>
+        <div class="ganesha-symbol">ॐ</div>
+        <div class="modak-card">🙏<strong>Ganpati Bappa Morya!</strong><span>Let your talent shine this Utsav.</span></div>
+      </div>
+    </section>
+
+    <section class="info-strip">
+      <div><strong>📍 Venue</strong><span>MiCasaa Society</span></div>
+      <div><strong>👨‍👩‍👧‍👦 For</strong><span>MiCasaa Residents</span></div>
+      <div><strong>📝 Registration</strong><span>Open for listed competitions</span></div>
+      <div><strong>📣 Updates</strong><span>Timings will be shared separately</span></div>
+    </section>
+
+    <section id="schedule" class="section schedule-section">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">Plan your participation</div>
+          <h2>Festival Timeline</h2>
+        </div>
+        <p>Registration is required only for competition / participation events marked <span class="pill">Register</span>.</p>
+      </div>
+      <div id="timeline" class="timeline"></div>
+    </section>
+
+    <section id="register" class="section register-section">
+      <div class="registration-card">
+        <div class="form-intro">
+          <div class="eyebrow light">Competition Entry</div>
+          <h2>Register Your Participation</h2>
+          <p>Select one or more events. Event-specific questions will appear automatically.</p>
+          <div class="stepper" aria-label="Registration steps">
+            <span class="active">1 <b>Participant</b></span>
+            <span>2 <b>Events</b></span>
+            <span>3 <b>Confirm</b></span>
+          </div>
+        </div>
+
+        <form id="registrationForm" novalidate>
+          <fieldset>
+            <legend>Participant details</legend>
+            <div class="form-grid">
+              <label>Participant name <em>*</em>
+                <input name="participantName" autocomplete="name" required placeholder="Full name" />
+              </label>
+              <label>Flat number <em>*</em>
+                <input name="flatNumber" required inputmode="numeric" placeholder="e.g. 803" />
+              </label>
+              <label>Wing <em>*</em>
+                <select name="wing" required>
+                  <option value="">Select wing</option>
+                  <option>A</option><option>B</option><option>C</option><option>D</option><option>Other</option>
+                </select>
+              </label>
+              <label>Age <em>*</em>
+                <input name="age" required type="number" min="3" max="100" placeholder="Age" />
+              </label>
+              <label>Age group <em>*</em>
+                <select name="ageGroup" required>
+                  <option value="">Select age group</option>
+                  <option>Junior / Kids</option>
+                  <option>Senior / Teen</option>
+                  <option>Adult</option>
+                </select>
+              </label>
+              <label>WhatsApp / Mobile <em>*</em>
+                <input name="mobile" required type="tel" inputmode="tel" pattern="[0-9 +()-]{10,18}" placeholder="10-digit mobile number" />
+              </label>
+              <label class="full">Parent / Guardian name <span class="optional">(for children)</span>
+                <input name="guardianName" placeholder="Parent or guardian name" />
+              </label>
+            </div>
+            <div class="existing-check">
+              <button id="checkExisting" class="ghost-btn inline-check" type="button">Check Existing Registration</button>
+              <span class="field-help">We match by participant name + wing + flat + mobile. If found, the saved entry will load here for editing.</span>
+            </div>
+            <div id="existingStatus" class="existing-status" hidden></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Choose competition(s) <em>*</em></legend>
+            <p class="field-help">You may select multiple events.</p>
+            <div id="competitionCards" class="competition-grid"></div>
+            <div id="eventError" class="error-text" hidden>Please select at least one competition.</div>
+          </fieldset>
+
+          <fieldset id="eventDetailsFieldset" hidden>
+            <legend>Event details</legend>
+            <div id="dynamicQuestions"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Confirmation</legend>
+            <label class="check-row">
+              <input type="checkbox" name="confirmation" required />
+              <span>I confirm the details are correct and the participant will be available on the scheduled event date. <em>*</em></span>
+            </label>
+            <label class="check-row optional-consent">
+              <input type="checkbox" name="photoConsent" />
+              <span>I am okay with event photographs/videos being used in MiCasaa society communication.</span>
+            </label>
+          </fieldset>
+
+          <div class="submit-area">
+            <button class="primary-btn submit-btn" type="submit">
+              <span class="submit-label">Submit Registration</span>
+              <span class="spinner" hidden></span>
+            </button>
+            <p class="privacy-note">🔒 Details are collected only for Ganesh Utsav coordination by Micasaa Spandan Committee.</p>
+          </div>
+        </form>
+      </div>
+
+      <aside class="side-card">
+        <div class="side-icon">🪔</div>
+        <h3>Before you submit</h3>
+        <ul>
+          <li>Use one form per participant.</li>
+          <li>You can choose multiple competitions.</li>
+          <li>For group talent entries, mention all team members.</li>
+          <li>Exact timings / rules will be shared by the committee.</li>
+        </ul>
+        <div class="quote">“Participation makes the celebration brighter.”</div>
+      </aside>
+    </section>
+  </main>
+
+  <div id="successModal" class="modal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="successTitle">
+      <div class="success-icon">✓</div>
+      <h2 id="successTitle">Registration received!</h2>
+      <p id="successMessage">Thank you for participating in MiCasaa Ganesh Utsav 2026.</p>
+      <div id="registrationSummary" class="summary-box"></div>
+      <p class="bappa">Ganpati Bappa Morya! 🙏🌺</p>
+      <button id="closeModal" class="primary-btn" type="button">Done</button>
+    </div>
+  </div>
+
+  <footer>
+    <div><strong>Micasaa Spandan Committee</strong><span>Ganesh Utsav 2026</span></div>
+    <div>Faith · Family · Friendship · Togetherness</div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

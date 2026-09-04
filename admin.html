@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#7f1237" />
+  <title>MiCasaa Ganesh Utsav — Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+  <div class="top-garland" aria-hidden="true">✿ ✿ ✿ ✿ ✿ ✿ ✿ ✿</div>
+  <header class="admin-header">
+    <div class="brand">
+      <img src="assets/micasaa-logo.png" alt="MiCasaa Green Lifestyle" />
+      <div><strong>Ganesh Utsav 2026</strong><span>Micasaa Spandan Committee · Admin</span></div>
+    </div>
+    <div class="header-actions">
+      <a href="index.html" class="ghost-btn">Open Registration Site</a>
+      <button id="logoutBtn" class="ghost-btn" hidden>Sign out</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="loginView" class="login-shell">
+      <div class="login-card">
+        <div class="login-icon">🪔</div>
+        <div class="eyebrow">Committee access</div>
+        <h1>Admin Dashboard</h1>
+        <p>Sign in with the admin account created in Supabase Authentication.</p>
+        <form id="loginForm">
+          <label>Email<input id="email" type="email" autocomplete="username" required placeholder="committee@example.com" /></label>
+          <label>Password<input id="password" type="password" autocomplete="current-password" required placeholder="••••••••" /></label>
+          <button class="primary-btn" type="submit"><span>Sign in</span><span id="loginSpinner" class="spinner" hidden></span></button>
+          <div id="loginError" class="message error" hidden></div>
+        </form>
+      </div>
+    </section>
+
+    <section id="dashboardView" class="dashboard" hidden>
+      <div class="dashboard-title">
+        <div><div class="eyebrow">Live registrations</div><h1>Competition Dashboard</h1><p id="lastUpdated">Loading registrations…</p></div>
+        <div class="title-actions"><button id="refreshBtn" class="ghost-btn">↻ Refresh</button><button id="exportBtn" class="primary-btn">⬇ Export CSV</button></div>
+      </div>
+
+      <div class="kpis">
+        <article><span>Total participants</span><strong id="kpiParticipants">—</strong><small>Unique registration rows</small></article>
+        <article><span>Event entries</span><strong id="kpiEntries">—</strong><small>Across all competitions</small></article>
+        <article><span>Unique flats</span><strong id="kpiFlats">—</strong><small>Wing + flat combinations</small></article>
+        <article><span>Updated today</span><strong id="kpiToday">—</strong><small>New or edited today</small></article>
+      </div>
+
+      <section class="panel summary-panel">
+        <div class="panel-head"><div><div class="eyebrow">At a glance</div><h2>Event-wise registrations</h2></div></div>
+        <div id="eventSummary" class="event-summary"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><div><div class="eyebrow">Participants</div><h2>Registration List</h2></div><div id="resultCount" class="result-count"></div></div>
+        <div class="filters">
+          <label class="search">Search<input id="searchInput" placeholder="Name, flat, mobile or registration ID" /></label>
+          <label>Wing<select id="wingFilter"><option value="">All wings</option><option>A</option><option>B</option><option>C</option><option>D</option><option>Other</option></select></label>
+          <label>Event<select id="eventFilter"><option value="">All events</option></select></label>
+          <label>Age group<select id="ageFilter"><option value="">All age groups</option><option>Junior / Kids</option><option>Senior / Teen</option><option>Adult</option></select></label>
+          <button id="clearFilters" class="clear-btn">Clear</button>
+        </div>
+        <div id="dashboardMessage" class="message" hidden></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Registration</th><th>Participant</th><th>Flat</th><th>Contact</th><th>Age</th><th>Events</th><th>Updated</th><th></th></tr></thead>
+            <tbody id="registrationRows"></tbody>
+          </table>
+        </div>
+        <div id="emptyState" class="empty-state" hidden>No registrations match these filters.</div>
+      </section>
+    </section>
+  </main>
+
+  <div id="editModal" class="modal" hidden>
+    <div class="modal-card">
+      <div class="modal-head"><div><div class="eyebrow">Committee edit</div><h2>Edit Registration</h2><p id="editRegistrationCode"></p></div><button id="closeEdit" class="icon-btn">×</button></div>
+      <form id="editForm">
+        <input type="hidden" name="id" />
+        <div class="form-grid">
+          <label>Participant name<input name="participantName" required /></label>
+          <label>Flat number<input name="flatNumber" required /></label>
+          <label>Wing<select name="wing" required><option>A</option><option>B</option><option>C</option><option>D</option><option>Other</option></select></label>
+          <label>Mobile<input name="mobile" required /></label>
+          <label>Age<input name="age" type="number" min="3" max="100" required /></label>
+          <label>Age group<select name="ageGroup" required><option>Junior / Kids</option><option>Senior / Teen</option><option>Adult</option></select></label>
+          <label class="full">Parent / Guardian<input name="guardianName" /></label>
+        </div>
+        <fieldset><legend>Competition(s)</legend><div id="editEvents" class="edit-events"></div></fieldset>
+        <label class="check-row"><input name="photoConsent" type="checkbox" /> Photo/video consent</label>
+        <div id="editError" class="message error" hidden></div>
+        <div class="modal-actions"><button type="button" id="cancelEdit" class="ghost-btn">Cancel</button><button type="submit" class="primary-btn">Save Changes</button></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
