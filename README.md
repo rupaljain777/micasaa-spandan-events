@@ -332,3 +332,19 @@ ADMIN_EMAIL                  = the verified committee/admin email address
 8. Redeploy the Pages project after adding/changing the environment variables.
 
 The resident registration still succeeds if the email notification endpoint is temporarily unavailable; email delivery is intentionally not shown to the resident. For troubleshooting, use **Cloudflare Pages Function logs** rather than adding an email-status message to the website.
+
+
+## v15 age-group and Got Talent eligibility update
+
+- Participant **Age Group is now locked and automatically derived from Age**.
+  - Junior Kids: 3–6
+  - Senior Kids: 7–12
+  - Teens: 13–19
+  - Adults: 20–59
+  - Senior Citizens: 60+
+- If a saved/draft age group conflicts with the entered age, the website corrects it automatically.
+- MiCasaa Got Talent labels now show eligibility:
+  - **Seniors (11 onwards)**
+  - **Juniors (Age 3 to 10)**
+- The admin edit form uses the same locked age-derived rule.
+- No Supabase schema change is required.

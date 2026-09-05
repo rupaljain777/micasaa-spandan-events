@@ -97,7 +97,7 @@
           <label>Wing<select name="wing" required><option>C1</option><option>C2</option><option>D</option><option>E</option><option>F</option><option>G</option></select></label>
           <label>Mobile<input name="mobile" required /></label>
           <label>Age<input name="age" type="number" min="3" max="100" required /></label>
-          <label>Age group<select name="ageGroup" required><option>Junior Kids</option><option>Senior Kids</option><option>Teens</option><option>Adults</option><option>Senior Citizens</option></select></label>
+          <label>Age group<select name="ageGroup" required disabled aria-disabled="true" tabindex="-1"><option value="">Enter age first</option><option>Junior Kids</option><option>Senior Kids</option><option>Teens</option><option>Adults</option><option>Senior Citizens</option></select><small>🔒 Automatically selected from age</small></label>
           <label class="full">Parent / Guardian<input name="guardianName" /></label>
         </div>
         <fieldset><legend>Competition(s)</legend><div id="editEvents" class="edit-events"></div></fieldset>

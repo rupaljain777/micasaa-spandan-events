@@ -4,9 +4,9 @@ const competitions = [
   {id:'shlok', name:'Ganesh Shlok / Poem / Short Speech', date:'14 Sept', time:'7 PM'},
   {id:'pakKala', name:'Pak Kala Competition', date:'15 Sept', time:'6–7 PM'},
   {id:'foodStall', name:'Food Stall', date:'17 Sept', time:'8 PM onwards'},
-  {id:'talentSenior', name:'MiCasaa Got Talent — Seniors', date:'18 Sept', time:'8 PM onwards'},
+  {id:'talentSenior', name:'MiCasaa Got Talent — Seniors (11 onwards)', date:'18 Sept', time:'8 PM onwards'},
   {id:'drawing', name:'Drawing Competition', date:'19 Sept', time:'1 PM onwards'},
-  {id:'talentJunior', name:'MiCasaa Got Talent — Juniors', date:'19 Sept', time:'8 PM onwards'},
+  {id:'talentJunior', name:'MiCasaa Got Talent — Juniors (Age 3 to 10)', date:'19 Sept', time:'8 PM onwards'},
   {id:'cricket', name:'Sports Day — Cricket', date:'20 Sept', time:'10 AM onwards'},
   {id:'football', name:'Sports Day — Football', date:'20 Sept', time:'10 AM onwards'},
   {id:'sackRace', name:'Sports Day — Sack Race', date:'20 Sept', time:'10 AM onwards'},
@@ -58,6 +58,8 @@ function configured(){
 function api(path){ return CONFIG.supabaseUrl.replace(/\/$/,'') + path; }
 function escapeHtml(v=''){ return String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
 function fmtDate(v){ if(!v) return ''; const d=new Date(v); return d.toLocaleString('en-IN',{day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}); }
+function ageGroupForAge(age){ const n=Number(age); if(!Number.isFinite(n))return ''; if(n>=3&&n<=6)return 'Junior Kids'; if(n>=7&&n<=12)return 'Senior Kids'; if(n>=13&&n<=19)return 'Teens'; if(n>=20&&n<=59)return 'Adults'; if(n>=60)return 'Senior Citizens'; return ''; }
+function syncAdminAgeGroup(){ const f=$('editForm'); if(!f)return ''; const age=f.elements.age, group=f.elements.ageGroup; if(!age||!group)return ''; const value=ageGroupForAge(age.value); group.value=value; group.disabled=true; group.setAttribute('aria-disabled','true'); group.tabIndex=-1; return value; }
 function saveSession(s){ session=s; if(s) localStorage.setItem('micasaaAdminSession',JSON.stringify(s)); else localStorage.removeItem('micasaaAdminSession'); }
 function getSavedSession(){ try{return JSON.parse(localStorage.getItem('micasaaAdminSession')||'null')}catch(_){return null} }
 
@@ -204,7 +206,7 @@ function collectAdminDetails(){
 
 function openEdit(id){
   const r=allRows.find(x=>x.id===id); if(!r)return;
-  const f=$('editForm'); f.elements.id.value=r.id; f.elements.participantName.value=r.participant_name; f.elements.flatNumber.value=r.flat_number; f.elements.wing.value=r.wing; f.elements.mobile.value=r.mobile; f.elements.age.value=r.age; f.elements.ageGroup.value=r.age_group; f.elements.guardianName.value=r.guardian_name||''; f.elements.photoConsent.checked=!!r.photo_consent;
+  const f=$('editForm'); f.elements.id.value=r.id; f.elements.participantName.value=r.participant_name; f.elements.flatNumber.value=r.flat_number; f.elements.wing.value=r.wing; f.elements.mobile.value=r.mobile; f.elements.age.value=r.age; f.elements.ageGroup.value=r.age_group; syncAdminAgeGroup(); f.elements.guardianName.value=r.guardian_name||''; f.elements.photoConsent.checked=!!r.photo_consent;
   $('editRegistrationCode').textContent=`${r.registration_code} · Last updated ${fmtDate(r.updated_at)}`;
   $('editEvents').innerHTML=competitions.map(c=>`<label class="event-check"><input type="checkbox" name="editEvent" value="${c.id}" ${(r.event_ids||[]).includes(c.id)?'checked':''}><span><strong>${escapeHtml(c.name)}</strong><br><small>${c.date} · ${c.time}</small></span></label>`).join('');
   $('editEvents').querySelectorAll('input[name="editEvent"]').forEach(el=>el.addEventListener('change',()=>renderEditDynamicQuestions(collectAdminDetails())));
@@ -213,9 +215,10 @@ function openEdit(id){
 }
 function closeEdit(){ $('editModal').hidden=true; }
 $('closeEdit').addEventListener('click',closeEdit); $('cancelEdit').addEventListener('click',closeEdit); $('editModal').addEventListener('click',e=>{if(e.target.id==='editModal')closeEdit()});
+const adminAgeInput=$('editForm')?.elements.age; if(adminAgeInput){ adminAgeInput.addEventListener('input',syncAdminAgeGroup); adminAgeInput.addEventListener('change',syncAdminAgeGroup); }
 
 $('editForm').addEventListener('submit',async e=>{
-  e.preventDefault(); const f=e.currentTarget; const ids=[...f.querySelectorAll('input[name="editEvent"]:checked')].map(x=>x.value);
+  e.preventDefault(); const f=e.currentTarget; syncAdminAgeGroup(); const ids=[...f.querySelectorAll('input[name="editEvent"]:checked')].map(x=>x.value);
   if(!ids.length){$('editError').textContent='Select at least one competition.';$('editError').hidden=false;return}
   const current=allRows.find(r=>r.id===f.elements.id.value);
   const payload={participantName:f.elements.participantName.value.trim(),flatNumber:f.elements.flatNumber.value.trim(),wing:f.elements.wing.value,age:Number(f.elements.age.value),ageGroup:f.elements.ageGroup.value,guardianName:f.elements.guardianName.value.trim(),mobile:f.elements.mobile.value.trim(),eventIds:ids,events:ids.map(id=>competitions.find(c=>c.id===id)?.name||id),details:collectAdminDetails(),photoConsent:f.elements.photoConsent.checked};

@@ -116,15 +116,16 @@
               <label><span><span data-i18n="age">Age</span> <em>*</em></span>
                 <input name="age" required type="number" min="3" max="100" placeholder="Age" data-i18n-placeholder="agePlaceholder" />
               </label>
-              <label><span><span data-i18n="ageGroup">Age group</span> <em>*</em></span>
-                <select name="ageGroup" required>
-                  <option value="" data-i18n="selectAgeGroup">Select age group</option>
+              <label class="age-group-field"><span><span data-i18n="ageGroup">Age group</span> <em>*</em></span>
+                <select name="ageGroup" required disabled aria-disabled="true" tabindex="-1">
+                  <option value="" data-i18n="selectAgeGroup">Enter age first</option>
                   <option value="Junior Kids" data-i18n="juniorKids">Junior Kids: 3 – 6 years</option>
                   <option value="Senior Kids" data-i18n="seniorKids">Senior Kids: 7 – 12 years</option>
                   <option value="Teens" data-i18n="teens">Teens: 13 – 19 years</option>
                   <option value="Adults" data-i18n="adults">Adults: 20 – 59 years</option>
                   <option value="Senior Citizens" data-i18n="seniorCitizens">Senior Citizens: 60+ years</option>
                 </select>
+                <small class="auto-field-note">🔒 <span data-i18n="ageGroupAuto">Automatically selected from age</span></small>
               </label>
               <label><span><span data-i18n="mobile">WhatsApp / Mobile</span> <em>*</em></span>
                 <input name="mobile" required type="tel" inputmode="tel" pattern="[0-9 +()-]{10,18}" placeholder="10-digit mobile number" data-i18n-placeholder="mobilePlaceholder" />
