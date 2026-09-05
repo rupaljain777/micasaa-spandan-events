@@ -19,24 +19,25 @@
       <div class="committee">Micasaa Spandan Committee</div>
     </div>
     <div class="header-actions">
-      <a class="ghost-btn" href="#schedule">View Schedule</a>
+      <label class="language-picker" for="languageSelect"><span data-i18n="languageLabel">Language</span><select id="languageSelect" aria-label="Select language"><option value="en">English</option><option value="hi">हिन्दी</option><option value="mr">मराठी</option></select></label>
+      <a class="ghost-btn" href="#schedule" data-i18n="viewSchedule">View Schedule</a>
       <a class="ghost-btn" href="admin.html">Committee Admin</a>
-      <a class="primary-btn" href="#register">Register Now</a>
+      <a class="primary-btn" href="#register" data-i18n="registerNow">Register Now</a>
     </div>
   </header>
 
   <main>
     <section class="hero">
       <div class="hero-copy">
-        <div class="eyebrow">14–25 September 2026 · 12 Days of Celebration</div>
-        <h1>Ganesh Utsav <span>Competition Registration</span></h1>
-        <p class="hero-text">A celebration of devotion, creativity, talent, sport and togetherness — right here at MiCasaa.</p>
+        <div class="eyebrow" data-i18n="heroEyebrow">14–25 September 2026 · 12 Days of Celebration</div>
+        <h1><span class="hero-main" data-i18n="ganeshUtsav">Ganesh Utsav</span> <span data-i18n="competitionRegistration">Competition Registration</span></h1>
+        <p class="hero-text" data-i18n="heroText">A celebration of devotion, creativity, talent, sport and togetherness — right here at MiCasaa.</p>
         <div class="hero-badges">
-          <span>🎨 Creative</span><span>🎤 Talent</span><span>🏏 Sports</span><span>🍲 Culinary</span>
+          <span data-i18n="creative">🎨 Creative</span><span data-i18n="talent">🎤 Talent</span><span data-i18n="sports">🏏 Sports</span><span data-i18n="culinary">🍲 Culinary</span>
         </div>
         <div class="hero-cta">
-          <a class="primary-btn large" href="#register">Register for Competitions</a>
-          <div class="microcopy">One form · Multiple events · Mobile friendly</div>
+          <a class="primary-btn large" href="#register" data-i18n="registerCompetitions">Register for Competitions</a>
+          <div class="microcopy" data-i18n="microcopy">One form · Multiple events · Mobile friendly</div>
         </div>
       </div>
       <div class="hero-art" aria-hidden="true">
@@ -47,19 +48,19 @@
     </section>
 
     <section class="info-strip">
-      <div><strong>📍 Venue</strong><span>MiCasaa Society</span></div>
-      <div><strong>👨‍👩‍👧‍👦 For</strong><span>MiCasaa Residents</span></div>
-      <div><strong>📝 Registration</strong><span>Open for listed competitions</span></div>
-      <div><strong>📣 Updates</strong><span>Timings will be shared separately</span></div>
+      <div><strong data-i18n="venue">📍 Venue</strong><span>MiCasaa Society</span></div>
+      <div><strong data-i18n="forLabel">👨‍👩‍👧‍👦 For</strong><span data-i18n="residents">MiCasaa Residents</span></div>
+      <div><strong data-i18n="registrationLabel">📝 Registration</strong><span data-i18n="registrationOpen">Open for listed competitions</span></div>
+      <div><strong data-i18n="updates">📣 Updates</strong><span data-i18n="timingsSeparate">Timings will be shared separately</span></div>
     </section>
 
     <section id="schedule" class="section schedule-section">
       <div class="section-heading">
         <div>
-          <div class="eyebrow">Plan your participation</div>
-          <h2>Festival Timeline</h2>
+          <div class="eyebrow" data-i18n="planParticipation">Plan your participation</div>
+          <h2 data-i18n="festivalTimeline">Festival Timeline</h2>
         </div>
-        <p>Registration is required only for competition / participation events marked <span class="pill">Register</span>.</p>
+        <p data-i18n-html="registrationMarked">Registration is required only for competition / participation events marked <span class="pill">Register</span>.</p>
       </div>
       <div id="timeline" class="timeline"></div>
     </section>
@@ -67,101 +68,96 @@
     <section id="register" class="section register-section">
       <div class="registration-card">
         <div class="form-intro">
-          <div class="eyebrow light">Competition Entry</div>
-          <h2>Register Your Participation</h2>
-          <p>Select one or more events. Event-specific questions will appear automatically.</p>
-          <div class="stepper" aria-label="Registration steps">
-            <span class="active">1 <b>Participant</b></span>
-            <span>2 <b>Events</b></span>
-            <span>3 <b>Confirm</b></span>
-          </div>
-        </div>
+          <div class="eyebrow light" data-i18n="competitionEntry">Competition Entry</div>
+          <h2 data-i18n="registerParticipation">Register Your Participation</h2>
+          <p data-i18n="selectEventsIntro">Select one or more events. Event-specific questions will appear automatically.</p>
+</div>
 
         <form id="registrationForm" novalidate>
           <fieldset>
-            <legend>Participant details</legend>
+            <legend data-i18n="participantDetails">Participant details</legend>
             <div class="form-grid">
-              <label>Participant name <em>*</em>
-                <input name="participantName" autocomplete="name" required placeholder="Full name" />
+              <label><span><span data-i18n="participantName">Participant name</span> <em>*</em></span>
+                <input name="participantName" autocomplete="name" required placeholder="Full name" data-i18n-placeholder="fullNamePlaceholder" />
               </label>
-              <label>Flat number <em>*</em>
-                <input name="flatNumber" required inputmode="numeric" placeholder="e.g. 803" />
+              <label><span><span data-i18n="flatNumber">Flat number</span> <em>*</em></span>
+                <input name="flatNumber" required inputmode="numeric" placeholder="e.g. 803" data-i18n-placeholder="flatPlaceholder" />
               </label>
-              <label>Wing <em>*</em>
+              <label><span><span data-i18n="wing">Wing</span> <em>*</em></span>
                 <select name="wing" required>
-                  <option value="">Select wing</option>
-                  <option>A</option><option>B</option><option>C</option><option>D</option><option>Other</option>
+                  <option value="" data-i18n="selectWing">Select wing</option>
+                  <option value="C1">C1</option><option value="C2">C2</option><option value="D">D</option><option value="E">E</option><option value="F">F</option><option value="G">G</option>
                 </select>
               </label>
-              <label>Age <em>*</em>
-                <input name="age" required type="number" min="3" max="100" placeholder="Age" />
+              <label><span><span data-i18n="age">Age</span> <em>*</em></span>
+                <input name="age" required type="number" min="3" max="100" placeholder="Age" data-i18n-placeholder="agePlaceholder" />
               </label>
-              <label>Age group <em>*</em>
+              <label><span><span data-i18n="ageGroup">Age group</span> <em>*</em></span>
                 <select name="ageGroup" required>
-                  <option value="">Select age group</option>
-                  <option>Junior / Kids</option>
-                  <option>Senior / Teen</option>
-                  <option>Adult</option>
+                  <option value="" data-i18n="selectAgeGroup">Select age group</option>
+                  <option value="Junior / Kids" data-i18n="juniorKids">Junior / Kids</option>
+                  <option value="Senior / Teen" data-i18n="seniorTeen">Senior / Teen</option>
+                  <option value="Adult" data-i18n="adult">Adult</option>
                 </select>
               </label>
-              <label>WhatsApp / Mobile <em>*</em>
-                <input name="mobile" required type="tel" inputmode="tel" pattern="[0-9 +()-]{10,18}" placeholder="10-digit mobile number" />
+              <label><span><span data-i18n="mobile">WhatsApp / Mobile</span> <em>*</em></span>
+                <input name="mobile" required type="tel" inputmode="tel" pattern="[0-9 +()-]{10,18}" placeholder="10-digit mobile number" data-i18n-placeholder="mobilePlaceholder" />
               </label>
-              <label class="full">Parent / Guardian name <span class="optional">(for children)</span>
-                <input name="guardianName" placeholder="Parent or guardian name" />
+              <label class="full"><span><span data-i18n="guardianName">Parent / Guardian name</span> <span class="optional" data-i18n="forChildren">(for children)</span></span>
+                <input name="guardianName" placeholder="Parent or guardian name" data-i18n-placeholder="guardianPlaceholder" />
               </label>
             </div>
             <div class="existing-check">
-              <button id="checkExisting" class="ghost-btn inline-check" type="button">Check Existing Registration</button>
-              <span class="field-help">We match by participant name + wing + flat + mobile. If found, the saved entry will load here for editing.</span>
+              <button id="checkExisting" class="ghost-btn inline-check" type="button" data-i18n="checkExisting">Check Existing Registration</button>
+              <span class="field-help" data-i18n="existingHelp">We match by participant name + wing + flat + mobile. If found, the saved entry will load here for editing.</span>
             </div>
             <div id="existingStatus" class="existing-status" hidden></div>
           </fieldset>
 
           <fieldset>
-            <legend>Choose competition(s) <em>*</em></legend>
-            <p class="field-help">You may select multiple events.</p>
+            <legend><span data-i18n="chooseCompetitions">Choose competition(s)</span> <em>*</em></legend>
+            <p class="field-help" data-i18n="multipleEvents">You may select multiple events.</p>
             <div id="competitionCards" class="competition-grid"></div>
-            <div id="eventError" class="error-text" hidden>Please select at least one competition.</div>
+            <div id="eventError" class="error-text" hidden data-i18n="selectAtLeastOne">Please select at least one competition.</div>
           </fieldset>
 
           <fieldset id="eventDetailsFieldset" hidden>
-            <legend>Event details</legend>
+            <legend data-i18n="eventDetails">Event details</legend>
             <div id="dynamicQuestions"></div>
           </fieldset>
 
           <fieldset>
-            <legend>Confirmation</legend>
+            <legend data-i18n="confirmation">Confirmation</legend>
             <label class="check-row">
               <input type="checkbox" name="confirmation" required />
-              <span>I confirm the details are correct and the participant will be available on the scheduled event date. <em>*</em></span>
+              <span><span data-i18n="confirmDetails">I confirm the details are correct and the participant will be available on the scheduled event date.</span> <em>*</em></span>
             </label>
             <label class="check-row optional-consent">
               <input type="checkbox" name="photoConsent" />
-              <span>I am okay with event photographs/videos being used in MiCasaa society communication.</span>
+              <span data-i18n="photoConsent">I am okay with event photographs/videos being used in MiCasaa society communication.</span>
             </label>
           </fieldset>
 
           <div class="submit-area">
             <button class="primary-btn submit-btn" type="submit">
-              <span class="submit-label">Submit Registration</span>
+              <span class="submit-label" data-i18n="submitRegistration">Submit Registration</span>
               <span class="spinner" hidden></span>
             </button>
-            <p class="privacy-note">🔒 Details are collected only for Ganesh Utsav coordination by Micasaa Spandan Committee.</p>
+            <p class="privacy-note" data-i18n="privacyNote">🔒 Details are collected only for Ganesh Utsav coordination by Micasaa Spandan Committee.</p>
           </div>
         </form>
       </div>
 
       <aside class="side-card">
         <div class="side-icon">🪔</div>
-        <h3>Before you submit</h3>
+        <h3 data-i18n="beforeSubmit">Before you submit</h3>
         <ul>
-          <li>Use one form per participant.</li>
-          <li>You can choose multiple competitions.</li>
-          <li>For group talent entries, mention all team members.</li>
-          <li>Exact timings / rules will be shared by the committee.</li>
+          <li data-i18n="tipOneForm">Use one form per participant.</li>
+          <li data-i18n="tipMultiple">You can choose multiple competitions.</li>
+          <li data-i18n="tipGroup">For group talent entries, mention all team members.</li>
+          <li data-i18n="tipTimings">Exact timings / rules will be shared by the committee.</li>
         </ul>
-        <div class="quote">“Participation makes the celebration brighter.”</div>
+        <div class="quote" data-i18n="participationQuote">“Participation makes the celebration brighter.”</div>
       </aside>
     </section>
   </main>
@@ -169,11 +165,11 @@
   <div id="successModal" class="modal" hidden>
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="successTitle">
       <div class="success-icon">✓</div>
-      <h2 id="successTitle">Registration received!</h2>
-      <p id="successMessage">Thank you for participating in MiCasaa Ganesh Utsav 2026.</p>
+      <h2 id="successTitle" data-i18n="registrationReceived">Registration received!</h2>
+      <p id="successMessage" data-i18n="successThankYou">Thank you for participating in MiCasaa Ganesh Utsav 2026.</p>
       <div id="registrationSummary" class="summary-box"></div>
       <p class="bappa">Ganpati Bappa Morya! 🙏🌺</p>
-      <button id="closeModal" class="primary-btn" type="button">Done</button>
+      <button id="closeModal" class="primary-btn" type="button" data-i18n="done">Done</button>
     </div>
   </div>
 

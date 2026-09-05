@@ -219,3 +219,11 @@ The Admin Dashboard now includes **Event-wise Printable Report**.
 The admin Edit Registration screen also exposes these event-specific fields, so committee members can correct them when required.
 
 No additional Supabase SQL change is required for this report feature; it uses the existing admin registration RPC.
+
+## September 2026 resident-experience update
+- Wings available in registration and admin: **C1, C2, D, E, F, G**.
+- **Shriram-Janaki Mahila Bhajni Mandal** replaces the previous 17 Sept bhajan-mandal name.
+- MiCasaa Got Talent schedule is now **Seniors on 18 Sept** and **Juniors on 19 Sept**.
+- The numbered 1/2/3 step indicator has been removed from the registration form.
+- Resident page supports **English, हिन्दी and मराठी** from the language selector in the header. The selection is remembered on that device.
+- Form controls, checkboxes and buttons have larger tap targets and text for easier use, including by senior citizens.

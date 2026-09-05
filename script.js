@@ -1,27 +1,55 @@
 const CONFIG = window.MICASAA_CONFIG || {};
 
+const I18N = {
+  en: {
+    languageLabel:'Language', creative:'🎨 Creative', talent:'🎤 Talent', sports:'🏏 Sports', culinary:'🍲 Culinary', venue:'📍 Venue', forLabel:'👨‍👩‍👧‍👦 For', residents:'MiCasaa Residents', registrationLabel:'📝 Registration', registrationOpen:'Open for listed competitions', updates:'📣 Updates', timingsSeparate:'Timings will be shared separately', viewSchedule:'View Schedule', registerNow:'Register Now', heroEyebrow:'14–25 September 2026 · 12 Days of Celebration', ganeshUtsav:'Ganesh Utsav', competitionRegistration:'Competition Registration', heroText:'A celebration of devotion, creativity, talent, sport and togetherness — right here at MiCasaa.', registerCompetitions:'Register for Competitions', microcopy:'One form · Multiple events · Mobile friendly', planParticipation:'Plan your participation', festivalTimeline:'Festival Timeline', registrationMarked:'Registration is required only for competition / participation events marked <span class="pill">Register</span>.', competitionEntry:'Competition Entry', registerParticipation:'Register Your Participation', selectEventsIntro:'Select one or more events. Event-specific questions will appear automatically.', participantDetails:'Participant details', participantName:'Participant name', flatNumber:'Flat number', wing:'Wing', age:'Age', ageGroup:'Age group', mobile:'WhatsApp / Mobile', guardianName:'Parent / Guardian name', forChildren:'(for children)', selectWing:'Select wing', selectAgeGroup:'Select age group', juniorKids:'Junior / Kids', seniorTeen:'Senior / Teen', adult:'Adult', fullNamePlaceholder:'Full name', flatPlaceholder:'e.g. 803', agePlaceholder:'Age', mobilePlaceholder:'10-digit mobile number', guardianPlaceholder:'Parent or guardian name', checkExisting:'Check Existing Registration', existingHelp:'We match by participant name + wing + flat + mobile. If found, the saved entry will load here for editing.', chooseCompetitions:'Choose competition(s)', multipleEvents:'You may select multiple events.', selectAtLeastOne:'Please select at least one competition.', eventDetails:'Event details', confirmation:'Confirmation', confirmDetails:'I confirm the details are correct and the participant will be available on the scheduled event date.', photoConsent:'I am okay with event photographs/videos being used in MiCasaa society communication.', submitRegistration:'Submit Registration', updateRegistration:'Update Registration', submitting:'Submitting…', updating:'Updating…', privacyNote:'🔒 Details are collected only for Ganesh Utsav coordination by Micasaa Spandan Committee.', beforeSubmit:'Before you submit', tipOneForm:'Use one form per participant.', tipMultiple:'You can choose multiple competitions.', tipGroup:'For group talent entries, mention all team members.', tipTimings:'Exact timings / rules will be shared by the committee.', participationQuote:'“Participation makes the celebration brighter.”', registrationReceived:'Registration received!', registrationUpdated:'Registration updated!', successThankYou:'Thank you for participating in MiCasaa Ganesh Utsav 2026.', successUpdated:'Your existing competition registration has been updated successfully.', done:'Done', registerTag:'Register', select:'Select', speechQuestion:'What will you present?', duration:'Approx. duration', performanceCategory:'Performance category', participationType:'Participation type', performanceAct:'Performance / act name', groupMembers:'Group member names', specialRequirement:'Special requirement', sportsHelp:'Your selected sports are already captured above. If registering a team event, add team information here.', teamDetails:'Team / partner details', foodStallName:'Stall / Display Name', foodCategory:'Food Category', foodItems:'Items you plan to sell / serve', foodNote:'Food Stall participants are requested to arrange their own table and any power/electrical requirements needed for their stall.', anythingElse:'Anything else?', committeeNotes:'Notes for the organising committee', optional:'Optional', noExisting:'No existing registration found. You can continue with a new registration.', checking:'Checking for an existing registration…', identityFirst:'Enter participant name, wing, flat number and a valid mobile number first.', editFound:'Existing registration {id} found. We loaded the saved details. Make any changes and press Update Registration.', editMode:'Edit mode', registrationId:'Registration ID', flatWord:'Flat', wingWord:'Wing', speechTitle:'Ganesh Shlok / Poem / Short Speech', sportsDay:'Sports Day', foodStall:'Food Stall', note:'Note',
+    days:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+    events:{agaman:'Ganpati Bappa Agaman',shlok:'Ganesh Shlok, Poem, Short Speech',pakKala:'Pak Kala Competition',bhajan:'MiCasaa Bhajan Mandal',foodStall:'Food Stall',shriramBhajan:'Shriram-Janaki Mahila Bhajni Mandal',talentSenior:'MiCasaa Got Talent — Seniors',drawing:'Drawing Competition',talentJunior:'MiCasaa Got Talent — Juniors',sports:'Sports Day',mahaprasad:'Mahaprasad',rangoli:'Rangoli Competition',satyanarayan:'Satyanarayana Pooja',musicalChairs:'Musical Chairs',prize:'Prize Distribution',visarjan:'Ganpati Bappa Visarjan'},
+    details:{talent:'Dance, Drama, Skit, Singing, Music, Other',sports:'Cricket, Football, Sack Race, Lemon Spoon Race'},
+    comps:{shlok:'Ganesh Shlok / Poem / Short Speech',pakKala:'Pak Kala Competition',foodStall:'Food Stall',talentSenior:'MiCasaa Got Talent — Seniors',drawing:'Drawing Competition',talentJunior:'MiCasaa Got Talent — Juniors',cricket:'Sports Day — Cricket',football:'Sports Day — Football',sackRace:'Sports Day — Sack Race',lemonSpoon:'Sports Day — Lemon Spoon Race',rangoli:'Rangoli Competition',musicalChairs:'Musical Chairs'}
+  },
+  hi: {
+    languageLabel:'भाषा', creative:'🎨 रचनात्मक', talent:'🎤 प्रतिभा', sports:'🏏 खेल', culinary:'🍲 पाक कला', venue:'📍 स्थान', forLabel:'👨‍👩‍👧‍👦 किसके लिए', residents:'MiCasaa निवासी', registrationLabel:'📝 पंजीकरण', registrationOpen:'सूचीबद्ध प्रतियोगिताओं के लिए खुला', updates:'📣 अपडेट', timingsSeparate:'समय अलग से साझा किया जाएगा', viewSchedule:'कार्यक्रम देखें', registerNow:'अभी पंजीकरण करें', heroEyebrow:'14–25 सितंबर 2026 · 12 दिनों का उत्सव', ganeshUtsav:'गणेश उत्सव', competitionRegistration:'प्रतियोगिता पंजीकरण', heroText:'भक्ति, रचनात्मकता, प्रतिभा, खेल और साथ होने का उत्सव — हमारे MiCasaa में।', registerCompetitions:'प्रतियोगिताओं के लिए पंजीकरण करें', microcopy:'एक फॉर्म · कई कार्यक्रम · मोबाइल पर आसान', planParticipation:'अपनी भागीदारी की योजना बनाएं', festivalTimeline:'उत्सव कार्यक्रम', registrationMarked:'केवल उन प्रतियोगिता / भागीदारी कार्यक्रमों के लिए पंजीकरण आवश्यक है जिन पर <span class="pill">पंजीकरण</span> लिखा है।', competitionEntry:'प्रतियोगिता प्रवेश', registerParticipation:'अपनी भागीदारी दर्ज करें', selectEventsIntro:'एक या अधिक कार्यक्रम चुनें। कार्यक्रम के अनुसार अतिरिक्त प्रश्न अपने-आप दिखाई देंगे।', participantDetails:'प्रतिभागी की जानकारी', participantName:'प्रतिभागी का नाम', flatNumber:'फ्लैट नंबर', wing:'विंग', age:'आयु', ageGroup:'आयु वर्ग', mobile:'व्हाट्सऐप / मोबाइल', guardianName:'माता-पिता / अभिभावक का नाम', forChildren:'(बच्चों के लिए)', selectWing:'विंग चुनें', selectAgeGroup:'आयु वर्ग चुनें', juniorKids:'जूनियर / बच्चे', seniorTeen:'सीनियर / किशोर', adult:'वयस्क', fullNamePlaceholder:'पूरा नाम', flatPlaceholder:'जैसे 803', agePlaceholder:'आयु', mobilePlaceholder:'10 अंकों का मोबाइल नंबर', guardianPlaceholder:'माता-पिता या अभिभावक का नाम', checkExisting:'पहले का पंजीकरण जांचें', existingHelp:'नाम + विंग + फ्लैट + मोबाइल से रिकॉर्ड मिलाया जाएगा। रिकॉर्ड मिलने पर उसे यहाँ संपादन के लिए लोड किया जाएगा।', chooseCompetitions:'प्रतियोगिता चुनें', multipleEvents:'आप एक से अधिक कार्यक्रम चुन सकते हैं।', selectAtLeastOne:'कृपया कम से कम एक प्रतियोगिता चुनें।', eventDetails:'कार्यक्रम की जानकारी', confirmation:'पुष्टि', confirmDetails:'मैं पुष्टि करता/करती हूँ कि जानकारी सही है और प्रतिभागी निर्धारित तारीख पर उपलब्ध रहेगा।', photoConsent:'MiCasaa सोसायटी संचार में कार्यक्रम की फोटो/वीडियो के उपयोग से मुझे आपत्ति नहीं है।', submitRegistration:'पंजीकरण जमा करें', updateRegistration:'पंजीकरण अपडेट करें', submitting:'जमा हो रहा है…', updating:'अपडेट हो रहा है…', privacyNote:'🔒 जानकारी केवल गणेश उत्सव समन्वय के लिए Micasaa Spandan Committee द्वारा उपयोग की जाएगी।', beforeSubmit:'जमा करने से पहले', tipOneForm:'हर प्रतिभागी के लिए एक फॉर्म भरें।', tipMultiple:'आप कई प्रतियोगिताएँ चुन सकते हैं।', tipGroup:'समूह प्रतिभा कार्यक्रम में सभी सदस्यों के नाम लिखें।', tipTimings:'सटीक समय / नियम समिति द्वारा अलग से साझा किए जाएंगे।', participationQuote:'“आपकी भागीदारी उत्सव को और सुंदर बनाती है।”', registrationReceived:'पंजीकरण प्राप्त हुआ!', registrationUpdated:'पंजीकरण अपडेट हुआ!', successThankYou:'MiCasaa गणेश उत्सव 2026 में भाग लेने के लिए धन्यवाद।', successUpdated:'आपका मौजूदा प्रतियोगिता पंजीकरण सफलतापूर्वक अपडेट हो गया है।', done:'ठीक है', registerTag:'पंजीकरण', select:'चुनें', speechQuestion:'आप क्या प्रस्तुत करेंगे?', duration:'अनुमानित अवधि', performanceCategory:'प्रस्तुति श्रेणी', participationType:'भागीदारी प्रकार', performanceAct:'प्रस्तुति / कार्यक्रम का नाम', groupMembers:'समूह सदस्यों के नाम', specialRequirement:'विशेष आवश्यकता', sportsHelp:'आपके चुने हुए खेल ऊपर दर्ज हैं। टीम इवेंट के लिए टीम की जानकारी यहाँ दें।', teamDetails:'टीम / पार्टनर की जानकारी', foodStallName:'स्टॉल / डिस्प्ले नाम', foodCategory:'खाद्य श्रेणी', foodItems:'बेचने / परोसने वाले आइटम', foodNote:'फूड स्टॉल प्रतिभागियों को टेबल और बिजली/इलेक्ट्रिकल व्यवस्था स्वयं करनी होगी।', anythingElse:'कुछ और?', committeeNotes:'आयोजन समिति के लिए नोट्स', optional:'वैकल्पिक', noExisting:'कोई पुराना पंजीकरण नहीं मिला। आप नया पंजीकरण कर सकते हैं।', checking:'पुराना पंजीकरण जांचा जा रहा है…', identityFirst:'पहले प्रतिभागी का नाम, विंग, फ्लैट नंबर और सही मोबाइल नंबर भरें।', editFound:'पंजीकरण {id} मिला। सहेजी गई जानकारी लोड कर दी गई है। बदलाव करें और पंजीकरण अपडेट करें दबाएं।', editMode:'संपादन मोड', registrationId:'पंजीकरण आईडी', flatWord:'फ्लैट', wingWord:'विंग', speechTitle:'गणेश श्लोक / कविता / लघु भाषण', sportsDay:'खेल दिवस', foodStall:'फूड स्टॉल', note:'नोट',
+    days:['रविवार','सोमवार','मंगलवार','बुधवार','गुरुवार','शुक्रवार','शनिवार'],
+    events:{agaman:'गणपति बप्पा आगमन',shlok:'गणेश श्लोक, कविता, लघु भाषण',pakKala:'पाक कला प्रतियोगिता',bhajan:'MiCasaa भजन मंडल',foodStall:'फूड स्टॉल',shriramBhajan:'श्रीराम-जानकी महिला भजनी मंडल',talentSenior:'MiCasaa Got Talent — सीनियर',drawing:'चित्रकला प्रतियोगिता',talentJunior:'MiCasaa Got Talent — जूनियर',sports:'खेल दिवस',mahaprasad:'महाप्रसाद',rangoli:'रंगोली प्रतियोगिता',satyanarayan:'सत्यनारायण पूजा',musicalChairs:'म्यूज़िकल चेयर्स',prize:'पुरस्कार वितरण',visarjan:'गणपति बप्पा विसर्जन'},
+    details:{talent:'नृत्य, नाटक, स्किट, गायन, संगीत, अन्य',sports:'क्रिकेट, फुटबॉल, बोरा दौड़, नींबू-चम्मच दौड़'},
+    comps:{shlok:'गणेश श्लोक / कविता / लघु भाषण',pakKala:'पाक कला प्रतियोगिता',foodStall:'फूड स्टॉल',talentSenior:'MiCasaa Got Talent — सीनियर',drawing:'चित्रकला प्रतियोगिता',talentJunior:'MiCasaa Got Talent — जूनियर',cricket:'खेल दिवस — क्रिकेट',football:'खेल दिवस — फुटबॉल',sackRace:'खेल दिवस — बोरा दौड़',lemonSpoon:'खेल दिवस — नींबू-चम्मच दौड़',rangoli:'रंगोली प्रतियोगिता',musicalChairs:'म्यूज़िकल चेयर्स'}
+  },
+  mr: {
+    languageLabel:'भाषा', creative:'🎨 सर्जनशील', talent:'🎤 कला', sports:'🏏 क्रीडा', culinary:'🍲 पाककला', venue:'📍 ठिकाण', forLabel:'👨‍👩‍👧‍👦 कोणासाठी', residents:'MiCasaa रहिवासी', registrationLabel:'📝 नोंदणी', registrationOpen:'नमूद स्पर्धांसाठी खुली', updates:'📣 अपडेट्स', timingsSeparate:'वेळ वेगळी कळवली जाईल', viewSchedule:'कार्यक्रम पाहा', registerNow:'आत्ता नोंदणी करा', heroEyebrow:'14–25 सप्टेंबर 2026 · 12 दिवसांचा उत्सव', ganeshUtsav:'गणेश उत्सव', competitionRegistration:'स्पर्धा नोंदणी', heroText:'भक्ती, सर्जनशीलता, कला, क्रीडा आणि एकोप्याचा उत्सव — आपल्या MiCasaa मध्ये.', registerCompetitions:'स्पर्धांसाठी नोंदणी करा', microcopy:'एक फॉर्म · अनेक कार्यक्रम · मोबाईलवर सोपे', planParticipation:'आपल्या सहभागाचे नियोजन करा', festivalTimeline:'उत्सव कार्यक्रम', registrationMarked:'फक्त <span class="pill">नोंदणी</span> चिन्ह असलेल्या स्पर्धा / सहभाग कार्यक्रमांसाठी नोंदणी आवश्यक आहे.', competitionEntry:'स्पर्धा प्रवेश', registerParticipation:'आपला सहभाग नोंदवा', selectEventsIntro:'एक किंवा अधिक कार्यक्रम निवडा. कार्यक्रमानुसार अतिरिक्त प्रश्न आपोआप दिसतील.', participantDetails:'सहभागीची माहिती', participantName:'सहभागीचे नाव', flatNumber:'फ्लॅट क्रमांक', wing:'विंग', age:'वय', ageGroup:'वयोगट', mobile:'व्हॉट्सअॅप / मोबाईल', guardianName:'पालक / संरक्षकाचे नाव', forChildren:'(मुलांसाठी)', selectWing:'विंग निवडा', selectAgeGroup:'वयोगट निवडा', juniorKids:'ज्युनियर / मुले', seniorTeen:'सीनियर / किशोर', adult:'प्रौढ', fullNamePlaceholder:'पूर्ण नाव', flatPlaceholder:'उदा. 803', agePlaceholder:'वय', mobilePlaceholder:'10 अंकी मोबाईल नंबर', guardianPlaceholder:'पालक किंवा संरक्षकाचे नाव', checkExisting:'आधीची नोंदणी तपासा', existingHelp:'नाव + विंग + फ्लॅट + मोबाईल यावरून नोंद शोधली जाईल. नोंद सापडल्यास ती बदलासाठी येथे दिसेल.', chooseCompetitions:'स्पर्धा निवडा', multipleEvents:'आपण एकापेक्षा अधिक कार्यक्रम निवडू शकता.', selectAtLeastOne:'कृपया किमान एक स्पर्धा निवडा.', eventDetails:'कार्यक्रमाची माहिती', confirmation:'पुष्टी', confirmDetails:'मी पुष्टी करतो/करते की माहिती बरोबर आहे आणि सहभागी नियोजित तारखेला उपलब्ध असेल.', photoConsent:'MiCasaa सोसायटीच्या संवादासाठी कार्यक्रमातील फोटो/व्हिडिओ वापरण्यास माझी हरकत नाही.', submitRegistration:'नोंदणी जमा करा', updateRegistration:'नोंदणी अपडेट करा', submitting:'जमा होत आहे…', updating:'अपडेट होत आहे…', privacyNote:'🔒 ही माहिती फक्त गणेश उत्सव समन्वयासाठी Micasaa Spandan Committee वापरेल.', beforeSubmit:'जमा करण्यापूर्वी', tipOneForm:'प्रत्येक सहभागीसाठी एक फॉर्म भरा.', tipMultiple:'आपण अनेक स्पर्धा निवडू शकता.', tipGroup:'गटातील प्रतिभा कार्यक्रमासाठी सर्व सदस्यांची नावे लिहा.', tipTimings:'अचूक वेळ / नियम समितीकडून वेगळे कळवले जातील.', participationQuote:'“आपला सहभाग उत्सव अधिक उजळवतो.”', registrationReceived:'नोंदणी प्राप्त झाली!', registrationUpdated:'नोंदणी अपडेट झाली!', successThankYou:'MiCasaa गणेश उत्सव 2026 मध्ये सहभागी झाल्याबद्दल धन्यवाद.', successUpdated:'आपली आधीची स्पर्धा नोंदणी यशस्वीपणे अपडेट झाली आहे.', done:'पूर्ण', registerTag:'नोंदणी', select:'निवडा', speechQuestion:'आपण काय सादर करणार?', duration:'अंदाजे कालावधी', performanceCategory:'सादरीकरण प्रकार', participationType:'सहभाग प्रकार', performanceAct:'सादरीकरण / कार्यक्रमाचे नाव', groupMembers:'गट सदस्यांची नावे', specialRequirement:'विशेष आवश्यकता', sportsHelp:'आपण निवडलेले खेळ वर नोंदले आहेत. टीम इव्हेंट असल्यास टीमची माहिती येथे द्या.', teamDetails:'टीम / पार्टनर माहिती', foodStallName:'स्टॉल / डिस्प्ले नाव', foodCategory:'खाद्य प्रकार', foodItems:'विक्री / सर्व्ह करण्याचे पदार्थ', foodNote:'फूड स्टॉल सहभागीनी टेबल आणि वीज/इलेक्ट्रिकलची व्यवस्था स्वतः करावी.', anythingElse:'आणखी काही?', committeeNotes:'आयोजन समितीसाठी नोंद', optional:'ऐच्छिक', noExisting:'आधीची नोंदणी सापडली नाही. आपण नवीन नोंदणी करू शकता.', checking:'आधीची नोंदणी तपासत आहोत…', identityFirst:'कृपया आधी सहभागीचे नाव, विंग, फ्लॅट क्रमांक आणि योग्य मोबाईल नंबर भरा.', editFound:'नोंदणी {id} सापडली. जतन केलेली माहिती भरली आहे. बदल करून नोंदणी अपडेट करा दाबा.', editMode:'बदल मोड', registrationId:'नोंदणी आयडी', flatWord:'फ्लॅट', wingWord:'विंग', speechTitle:'गणेश श्लोक / कविता / छोटेखानी भाषण', sportsDay:'क्रीडा दिवस', foodStall:'फूड स्टॉल', note:'नोंद',
+    days:['रविवार','सोमवार','मंगळवार','बुधवार','गुरुवार','शुक्रवार','शनिवार'],
+    events:{agaman:'गणपती बाप्पा आगमन',shlok:'गणेश श्लोक, कविता, छोटेखानी भाषण',pakKala:'पाककला स्पर्धा',bhajan:'MiCasaa भजन मंडळ',foodStall:'फूड स्टॉल',shriramBhajan:'श्रीराम-जानकी महिला भजनी मंडळ',talentSenior:'MiCasaa Got Talent — सीनियर',drawing:'चित्रकला स्पर्धा',talentJunior:'MiCasaa Got Talent — ज्युनियर',sports:'क्रीडा दिवस',mahaprasad:'महाप्रसाद',rangoli:'रांगोळी स्पर्धा',satyanarayan:'सत्यनारायण पूजा',musicalChairs:'म्युझिकल चेअर्स',prize:'बक्षीस वितरण',visarjan:'गणपती बाप्पा विसर्जन'},
+    details:{talent:'नृत्य, नाटक, स्किट, गायन, संगीत, इतर',sports:'क्रिकेट, फुटबॉल, गोणी शर्यत, लिंबू-चमचा शर्यत'},
+    comps:{shlok:'गणेश श्लोक / कविता / छोटेखानी भाषण',pakKala:'पाककला स्पर्धा',foodStall:'फूड स्टॉल',talentSenior:'MiCasaa Got Talent — सीनियर',drawing:'चित्रकला स्पर्धा',talentJunior:'MiCasaa Got Talent — ज्युनियर',cricket:'क्रीडा दिवस — क्रिकेट',football:'क्रीडा दिवस — फुटबॉल',sackRace:'क्रीडा दिवस — गोणी शर्यत',lemonSpoon:'क्रीडा दिवस — लिंबू-चमचा शर्यत',rangoli:'रांगोळी स्पर्धा',musicalChairs:'म्युझिकल चेअर्स'}
+  }
+};
+let currentLang = localStorage.getItem('micasaaLanguage') || 'en';
+if(!I18N[currentLang]) currentLang='en';
+function t(key){ return I18N[currentLang][key] ?? I18N.en[key] ?? key; }
+function tx(obj,key){ return (I18N[currentLang][obj]||{})[key] ?? (I18N.en[obj]||{})[key] ?? key; }
+
 const fullSchedule = [
-  {date:'14 Sept', day:'Monday', events:[{icon:'🙏', name:'Ganpati Bappa Agaman'},{icon:'📖', name:'Ganesh Shlok, Poem, Short Speech', register:true}]},
-  {date:'15 Sept', day:'Tuesday', events:[{icon:'👨‍🍳', name:'Pak Kala Competition', register:true},{icon:'🎵', name:'MiCasaa Bhajan Mandal'}]},
-  {date:'16 Sept', day:'Wednesday', events:[{icon:'🍽️', name:'Food Stall', register:true}]},
-  {date:'17 Sept', day:'Thursday', events:[{icon:'🎶', name:'Chandan Nagar Bhajan Mandal'}]},
-  {date:'18 Sept', day:'Friday', events:[{icon:'🎭', name:'MiCasaa Got Talent — Juniors', details:'Dance, Drama, Skit, Singing, Music, Other', register:true}]},
-  {date:'19 Sept', day:'Saturday', events:[{icon:'🎨', name:'Drawing Competition', register:true},{icon:'🎤', name:'MiCasaa Got Talent — Seniors', details:'Dance, Drama, Skit, Singing, Music, Other', register:true}]},
-  {date:'20 Sept', day:'Sunday', events:[{icon:'🏏', name:'Sports Day', details:'Cricket, Football, Sack Race, Lemon Spoon Race', register:true},{icon:'🍲', name:'Mahaprasad'}]},
-  {date:'21 Sept', day:'Monday', events:[{icon:'🌈', name:'Rangoli Competition', register:true}]},
-  {date:'22 Sept', day:'Tuesday', events:[{icon:'🪔', name:'Satyanarayana Pooja'}]},
-  {date:'23 Sept', day:'Wednesday', events:[{icon:'🪑', name:'Musical Chairs', register:true}]},
-  {date:'24 Sept', day:'Thursday', events:[{icon:'🏆', name:'Prize Distribution'}]},
-  {date:'25 Sept', day:'Friday', events:[{icon:'🌺', name:'Ganpati Bappa Visarjan'}]}
+  {date:'14 Sept', dayIndex:1, events:[{icon:'🙏', key:'agaman'},{icon:'📖', key:'shlok', register:true}]},
+  {date:'15 Sept', dayIndex:2, events:[{icon:'👨‍🍳', key:'pakKala', register:true},{icon:'🎵', key:'bhajan'}]},
+  {date:'16 Sept', dayIndex:3, events:[{icon:'🍽️', key:'foodStall', register:true}]},
+  {date:'17 Sept', dayIndex:4, events:[{icon:'🎶', key:'shriramBhajan'}]},
+  {date:'18 Sept', dayIndex:5, events:[{icon:'🎤', key:'talentSenior', detailsKey:'talent', register:true}]},
+  {date:'19 Sept', dayIndex:6, events:[{icon:'🎨', key:'drawing', register:true},{icon:'🎭', key:'talentJunior', detailsKey:'talent', register:true}]},
+  {date:'20 Sept', dayIndex:0, events:[{icon:'🏏', key:'sports', detailsKey:'sports', register:true},{icon:'🍲', key:'mahaprasad'}]},
+  {date:'21 Sept', dayIndex:1, events:[{icon:'🌈', key:'rangoli', register:true}]},
+  {date:'22 Sept', dayIndex:2, events:[{icon:'🪔', key:'satyanarayan'}]},
+  {date:'23 Sept', dayIndex:3, events:[{icon:'🪑', key:'musicalChairs', register:true}]},
+  {date:'24 Sept', dayIndex:4, events:[{icon:'🏆', key:'prize'}]},
+  {date:'25 Sept', dayIndex:5, events:[{icon:'🌺', key:'visarjan'}]}
 ];
 
 const competitions = [
   {id:'shlok', icon:'📖', name:'Ganesh Shlok / Poem / Short Speech', date:'14 Sept', type:'speech'},
   {id:'pakKala', icon:'👨‍🍳', name:'Pak Kala Competition', date:'15 Sept'},
   {id:'foodStall', icon:'🍽️', name:'Food Stall', date:'16 Sept', type:'foodstall'},
-  {id:'talentJunior', icon:'🎭', name:'MiCasaa Got Talent — Juniors', date:'18 Sept', type:'talent'},
+  {id:'talentSenior', icon:'🎤', name:'MiCasaa Got Talent — Seniors', date:'18 Sept', type:'talent'},
   {id:'drawing', icon:'🎨', name:'Drawing Competition', date:'19 Sept'},
-  {id:'talentSenior', icon:'🎤', name:'MiCasaa Got Talent — Seniors', date:'19 Sept', type:'talent'},
+  {id:'talentJunior', icon:'🎭', name:'MiCasaa Got Talent — Juniors', date:'19 Sept', type:'talent'},
   {id:'cricket', icon:'🏏', name:'Sports Day — Cricket', date:'20 Sept', type:'sport'},
   {id:'football', icon:'⚽', name:'Sports Day — Football', date:'20 Sept', type:'sport'},
   {id:'sackRace', icon:'🏃', name:'Sports Day — Sack Race', date:'20 Sept', type:'sport'},
@@ -31,11 +59,23 @@ const competitions = [
 ];
 
 const timeline = document.getElementById('timeline');
-timeline.innerHTML = fullSchedule.map(d => `<article class="day-card"><div class="day-head"><span class="date-chip">${d.date}</span><span class="weekday">${d.day}</span></div>${d.events.map(e => `<div class="event-line"><span class="event-icon">${e.icon}</span><div><strong>${e.name}</strong>${e.details?`<small>${e.details}</small>`:''}${e.register?'<span class="register-tag">Register</span>':''}</div></div>`).join('')}</article>`).join('');
-
 const cards = document.getElementById('competitionCards');
-cards.innerHTML = competitions.map(c => `<label class="competition-card" data-id="${c.id}"><input type="checkbox" name="events" value="${c.id}" /><strong>${c.icon} ${c.name}</strong><small><span class="event-date">${c.date}</span> · 2026</small></label>`).join('');
-
+function renderTimeline(){
+  timeline.innerHTML = fullSchedule.map(d => `<article class="day-card"><div class="day-head"><span class="date-chip">${d.date}</span><span class="weekday">${I18N[currentLang].days[d.dayIndex]}</span></div>${d.events.map(e => `<div class="event-line"><span class="event-icon">${e.icon}</span><div><strong>${tx('events',e.key)}</strong>${e.detailsKey?`<small>${tx('details',e.detailsKey)}</small>`:''}${e.register?`<span class="register-tag">${t('registerTag')}</span>`:''}</div></div>`).join('')}</article>`).join('');
+}
+function renderCompetitionCards(){
+  const selected=new Set([...document.querySelectorAll('input[name="events"]:checked')].map(x=>x.value));
+  cards.innerHTML = competitions.map(c => `<label class="competition-card ${selected.has(c.id)?'selected':''}" data-id="${c.id}"><input type="checkbox" name="events" value="${c.id}" ${selected.has(c.id)?'checked':''}/><strong>${c.icon} ${tx('comps',c.id)}</strong><small><span class="event-date">${c.date}</span> · 2026</small></label>`).join('');
+}
+function applyTranslations(){
+  document.documentElement.lang=currentLang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.dataset.i18n; if(t(k)!==undefined) el.textContent=t(k); });
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{ const k=el.dataset.i18nHtml; el.innerHTML=t(k); });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{ el.placeholder=t(el.dataset.i18nPlaceholder); });
+  const lang=document.getElementById('languageSelect'); if(lang) lang.value=currentLang;
+  renderTimeline(); renderCompetitionCards();
+  if(typeof renderDynamicQuestions==='function') renderDynamicQuestions();
+}
 const form = document.getElementById('registrationForm');
 const dynamicQuestions = document.getElementById('dynamicQuestions');
 const detailsFieldset = document.getElementById('eventDetailsFieldset');
@@ -55,14 +95,14 @@ function renderDynamicQuestions(){
   detailsFieldset.hidden = false;
   const selectedComps = competitions.filter(c=>selected.includes(c.id));
   const blocks = [];
-  if(selectedComps.some(c=>c.type==='speech')) blocks.push(`<div class="dynamic-block"><h4>📖 Ganesh Shlok / Poem / Short Speech</h4><div class="dynamic-grid"><label>What will you present?<select name="speechType"><option value="">Select</option><option>Ganesh Shlok</option><option>Poem</option><option>Short Speech</option></select></label><label>Approx. duration<input name="speechDuration" placeholder="e.g. 2 minutes" /></label></div></div>`);
+  if(selectedComps.some(c=>c.type==='speech')) blocks.push(`<div class="dynamic-block"><h4>📖 ${t('speechTitle')}</h4><div class="dynamic-grid"><label>${t('speechQuestion')}<select name="speechType"><option value="">${t('select')}</option><option value="Ganesh Shlok">Ganesh Shlok</option><option value="Poem">Poem</option><option value="Short Speech">Short Speech</option></select></label><label>${t('duration')}<input name="speechDuration" placeholder="e.g. 2 minutes" /></label></div></div>`);
   if(selectedComps.some(c=>c.type==='talent')){
-    const talentNames = selectedComps.filter(c=>c.type==='talent').map(c=>c.name).join(' / ');
-    blocks.push(`<div class="dynamic-block"><h4>🎭 ${talentNames}</h4><div class="dynamic-grid"><label>Performance category<select name="talentCategory"><option value="">Select</option><option>Dance</option><option>Singing</option><option>Drama</option><option>Skit</option><option>Instrumental Music</option><option>Other</option></select></label><label>Participation type<select name="participationType"><option value="">Select</option><option>Solo</option><option>Duo</option><option>Group</option></select></label><label>Performance / act name<input name="performanceName" placeholder="Optional title" /></label><label>Approx. duration<input name="performanceDuration" placeholder="e.g. 4 minutes" /></label><label class="full">Group member names<textarea name="groupMembers" placeholder="If Duo / Group, list all participant names"></textarea></label><label class="full">Special requirement<textarea name="specialRequirement" placeholder="e.g. microphone, music playback, chairs"></textarea></label></div></div>`);
+    const talentNames = selectedComps.filter(c=>c.type==='talent').map(c=>tx('comps',c.id)).join(' / ');
+    blocks.push(`<div class="dynamic-block"><h4>🎭 ${talentNames}</h4><div class="dynamic-grid"><label>${t('performanceCategory')}<select name="talentCategory"><option value="">${t('select')}</option><option value="Dance">Dance</option><option value="Singing">Singing</option><option value="Drama">Drama</option><option value="Skit">Skit</option><option value="Instrumental Music">Instrumental Music</option><option value="Other">Other</option></select></label><label>${t('participationType')}<select name="participationType"><option value="">${t('select')}</option><option value="Solo">Solo</option><option value="Duo">Duo</option><option value="Group">Group</option></select></label><label>${t('performanceAct')}<input name="performanceName" placeholder="${t('optional')}" /></label><label>${t('duration')}<input name="performanceDuration" placeholder="e.g. 4 minutes" /></label><label class="full">${t('groupMembers')}<textarea name="groupMembers"></textarea></label><label class="full">${t('specialRequirement')}<textarea name="specialRequirement"></textarea></label></div></div>`);
   }
-  if(selectedComps.some(c=>c.type==='sport')) blocks.push(`<div class="dynamic-block"><h4>🏅 Sports Day</h4><p class="field-help">Your selected sports are already captured above. If registering a team event, add team information here.</p><div class="dynamic-grid"><label class="full">Team / partner details<textarea name="sportsTeamDetails" placeholder="Team name or other participants, if applicable"></textarea></label></div></div>`);
-  if(selectedComps.some(c=>c.type==='foodstall')) blocks.push(`<div class="dynamic-block"><h4>🍽️ Food Stall</h4><div class="dynamic-grid"><label>Stall / Display Name<input name="foodStallName" placeholder="e.g. Jain Snacks Corner" /></label><label>Food Category<select name="foodCategory"><option value="">Select</option><option>Snacks</option><option>Chaat</option><option>Main Course</option><option>Dessert / Sweets</option><option>Beverages</option><option>Healthy / Homemade</option><option>Other</option></select></label><label class="full">Items you plan to sell / serve<textarea name="foodItems" placeholder="List your main food items"></textarea></label><div class="full food-stall-note"><strong>Note:</strong> Food Stall participants are requested to arrange their own table and any power/electrical requirements needed for their stall.</div></div></div>`);
-  blocks.push(`<div class="dynamic-block"><h4>📝 Anything else?</h4><label>Notes for the organising committee<textarea name="notes" placeholder="Optional"></textarea></label></div>`);
+  if(selectedComps.some(c=>c.type==='sport')) blocks.push(`<div class="dynamic-block"><h4>🏅 ${t('sportsDay')}</h4><p class="field-help">${t('sportsHelp')}</p><div class="dynamic-grid"><label class="full">${t('teamDetails')}<textarea name="sportsTeamDetails"></textarea></label></div></div>`);
+  if(selectedComps.some(c=>c.type==='foodstall')) blocks.push(`<div class="dynamic-block"><h4>🍽️ ${t('foodStall')}</h4><div class="dynamic-grid"><label>${t('foodStallName')}<input name="foodStallName" /></label><label>${t('foodCategory')}<select name="foodCategory"><option value="">${t('select')}</option><option value="Snacks">Snacks</option><option value="Chaat">Chaat</option><option value="Main Course">Main Course</option><option value="Dessert / Sweets">Dessert / Sweets</option><option value="Beverages">Beverages</option><option value="Healthy / Homemade">Healthy / Homemade</option><option value="Other">Other</option></select></label><label class="full">${t('foodItems')}<textarea name="foodItems"></textarea></label><div class="full food-stall-note"><strong>${t('note')}:</strong> ${t('foodNote')}</div></div></div>`);
+  blocks.push(`<div class="dynamic-block"><h4>📝 ${t('anythingElse')}</h4><label>${t('committeeNotes')}<textarea name="notes" placeholder="${t('optional')}"></textarea></label></div>`);
   dynamicQuestions.innerHTML = blocks.join('');
   if(pendingDetails){
     for(const [key,value] of Object.entries(pendingDetails)){
@@ -120,7 +160,7 @@ function clearExistingStatus(){
   existingStatus.className='existing-status';
   existingStatus.textContent='';
   loadedRegistrationCode=null;
-  form.querySelector('.submit-label').textContent='Submit Registration';
+  form.querySelector('.submit-label').textContent=t('submitRegistration');
 }
 
 function loadExistingRegistration(r){
@@ -130,13 +170,13 @@ function loadExistingRegistration(r){
   renderDynamicQuestions();
   if(form.elements.photoConsent) form.elements.photoConsent.checked=!!r.photoConsent;
   loadedRegistrationCode=r.registrationCode;
-  form.querySelector('.submit-label').textContent='Update Registration';
-  setExistingStatus(`✅ Existing registration <strong>${escapeHtml(r.registrationCode)}</strong> found. We loaded the saved details. Make any changes and press <strong>Update Registration</strong>. <span class="edit-chip">Edit mode</span>`, 'found');
+  form.querySelector('.submit-label').textContent=t('updateRegistration');
+  setExistingStatus(`✅ ${t('editFound').replace('{id}',`<strong>${escapeHtml(r.registrationCode)}</strong>`)} <span class="edit-chip">${t('editMode')}</span>`, 'found');
 }
 
 async function checkExistingRegistration({silent=false}={}){
   if(!identityReady()){
-    if(!silent) setExistingStatus('Enter participant name, wing, flat number and a valid mobile number first.', 'not-found');
+    if(!silent) setExistingStatus(t('identityFirst'), 'not-found');
     return false;
   }
   if(!backendConfigured()){
@@ -144,12 +184,12 @@ async function checkExistingRegistration({silent=false}={}){
     return false;
   }
   checkExistingBtn.disabled=true;
-  if(!silent) setExistingStatus('Checking for an existing registration…','not-found');
+  if(!silent) setExistingStatus(t('checking'),'not-found');
   try{
     const out=await rpc('find_registration', identityPayload());
     if(out && out.found && out.registration){ loadExistingRegistration(out.registration); return true; }
     clearExistingStatus();
-    if(!silent) setExistingStatus('No existing registration found. You can continue with a new registration.', 'not-found');
+    if(!silent) setExistingStatus(t('noExisting'), 'not-found');
     return false;
   }catch(err){
     if(!silent) setExistingStatus(`Could not check existing registration: ${escapeHtml(err.message)}`, 'error');
@@ -192,16 +232,16 @@ function formToPayload(){
 function setSubmitting(on){
   const btn=form.querySelector('.submit-btn');
   btn.disabled=on;
-  btn.querySelector('.submit-label').textContent=on ? (loadedRegistrationCode?'Updating…':'Submitting…') : (loadedRegistrationCode?'Update Registration':'Submit Registration');
+  btn.querySelector('.submit-label').textContent=on ? (loadedRegistrationCode?t('updating'):t('submitting')) : (loadedRegistrationCode?t('updateRegistration'):t('submitRegistration'));
   btn.querySelector('.spinner').hidden=!on;
 }
 
 function showSuccess(data, result){
   const modal=document.getElementById('successModal');
   const updated=result.action==='updated';
-  document.getElementById('successTitle').textContent=updated?'Registration updated!':'Registration received!';
-  document.getElementById('successMessage').textContent=updated?'Your existing competition registration has been updated successfully.':'Thank you for participating in MiCasaa Ganesh Utsav 2026.';
-  document.getElementById('registrationSummary').innerHTML=`<strong>${escapeHtml(data.participantName)}</strong> · Flat ${escapeHtml(data.flatNumber)}, Wing ${escapeHtml(data.wing)}<br><span>${data.events.map(escapeHtml).join(' · ')}</span><br><small>Registration ID: <strong>${escapeHtml(result.registrationCode||'')}</strong></small>`;
+  document.getElementById('successTitle').textContent=updated?t('registrationUpdated'):t('registrationReceived');
+  document.getElementById('successMessage').textContent=updated?t('successUpdated'):t('successThankYou');
+  document.getElementById('registrationSummary').innerHTML=`<strong>${escapeHtml(data.participantName)}</strong> · ${t('flatWord')} ${escapeHtml(data.flatNumber)}, ${t('wingWord')} ${escapeHtml(data.wing)}<br><span>${data.eventIds.map(id=>escapeHtml(tx('comps',id))).join(' · ')}</span><br><small>${t('registrationId')}: <strong>${escapeHtml(result.registrationCode||'')}</strong></small>`;
   modal.hidden=false;
 }
 
@@ -236,6 +276,11 @@ form.addEventListener('submit', async e=>{
     existingStatus.scrollIntoView({behavior:'smooth',block:'center'});
   }finally{ setSubmitting(false); }
 });
+
+
+const languageSelect=document.getElementById('languageSelect');
+if(languageSelect){ languageSelect.addEventListener('change',()=>{ currentLang=languageSelect.value; localStorage.setItem('micasaaLanguage',currentLang); applyTranslations(); }); }
+applyTranslations();
 
 document.getElementById('closeModal').addEventListener('click',()=>document.getElementById('successModal').hidden=true);
 document.getElementById('successModal').addEventListener('click',e=>{if(e.target.id==='successModal') e.currentTarget.hidden=true;});
