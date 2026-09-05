@@ -227,3 +227,15 @@ No additional Supabase SQL change is required for this report feature; it uses t
 - The numbered 1/2/3 step indicator has been removed from the registration form.
 - Resident page supports **English, हिन्दी and मराठी** from the language selector in the header. The selection is remembered on that device.
 - Form controls, checkboxes and buttons have larger tap targets and text for easier use, including by senior citizens.
+
+
+## Age groups
+
+The registration and admin pages use these age groups:
+- Junior Kids: 3–6 years
+- Senior Kids: 7–12 years
+- Teens: 13–19 years
+- Adults: 20–59 years
+- Senior Citizens: 60+ years
+
+On the resident registration page, the age group is automatically selected from the entered age to reduce errors.
