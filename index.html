@@ -194,22 +194,18 @@
       <h2 id="successTitle" data-i18n="registrationReceived">Registration received!</h2>
       <p id="successMessage" data-i18n="successThankYou">Thank you for participating in MiCasaa Ganesh Utsav 2026.</p>
       <div id="registrationSummary" class="summary-box"></div>
-      <div class="confirmation-share">
-        <p class="share-heading" data-i18n="shareConfirmationTitle">Keep a copy & inform the committee</p>
-        <p class="share-help" data-i18n="shareConfirmationHelp">WhatsApp will open with your registration details already filled. Please tap Send.</p>
-        <div class="share-actions">
-          <button id="sendCommitteeWhatsApp" class="whatsapp-btn" type="button">
-            <span class="wa-icon" aria-hidden="true">●</span> <span data-i18n="sendCommitteeWhatsApp">Send to Committee on WhatsApp</span>
+      <div class="confirmation-share mandatory-share">
+        <p class="share-heading" data-i18n="shareConfirmationTitle">Required final step</p>
+        <p class="share-help" data-i18n="shareConfirmationHelp">To complete the registration, you must send these details to the Micasaa Spandan Committee on WhatsApp.</p>
+        <div class="share-actions single-action">
+          <button id="sendCommitteeWhatsApp" class="whatsapp-btn mandatory-whatsapp" type="button">
+            <span class="wa-icon" aria-hidden="true">●</span> <span data-i18n="sendCommitteeWhatsApp">Mandatory: Send to Committee on WhatsApp</span>
           </button>
-          <button id="sendSelfWhatsApp" class="whatsapp-btn secondary-wa" type="button">
-            <span class="wa-icon" aria-hidden="true">●</span> <span data-i18n="sendSelfWhatsApp">Send to My WhatsApp</span>
-          </button>
-          <button id="copyConfirmation" class="copy-btn" type="button" data-i18n="copyRegistrationDetails">Copy registration details</button>
         </div>
         <p id="shareStatus" class="share-status" role="status" aria-live="polite"></p>
       </div>
       <p class="bappa">Ganpati Bappa Morya! 🙏🌺</p>
-      <button id="closeModal" class="primary-btn" type="button" data-i18n="done">Done</button>
+      <button id="closeModal" class="primary-btn" type="button" disabled>Send on WhatsApp to finish</button>
     </div>
   </div>
 

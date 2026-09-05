@@ -159,25 +159,46 @@ function renderRows(){
   document.querySelectorAll('.edit-btn').forEach(b=>b.addEventListener('click',()=>openEdit(b.dataset.id)));
 }
 
+const ADMIN_DETAIL_FIELD_NAMES=['speechType','speechDuration','talentCategory','participationType','performanceName','performanceDuration','groupMembers','specialRequirement','sportsTeamDetails','foodStallName','foodCategory','foodItems','notes'];
+const ADMIN_MULTI_DETAIL_FIELDS=new Set(['speechType','talentCategory','participationType','foodCategory']);
+function splitAdminMultiValue(value){
+  if(Array.isArray(value)) return value.map(v=>String(v).trim()).filter(Boolean);
+  return String(value||'').split(',').map(v=>v.trim()).filter(Boolean);
+}
+function readAdminDetailField(f,name){
+  const nodes=[...f.querySelectorAll(`[name="${name}"]`)];
+  if(!nodes.length) return '';
+  if(ADMIN_MULTI_DETAIL_FIELDS.has(name)) return nodes.filter(n=>n.checked).map(n=>n.value).join(', ');
+  const el=f.elements[name]; return String(el?.value||'').trim();
+}
+function writeAdminDetailField(f,name,value){
+  const nodes=[...f.querySelectorAll(`[name="${name}"]`)];
+  if(!nodes.length) return;
+  if(ADMIN_MULTI_DETAIL_FIELDS.has(name)){
+    const selected=new Set(splitAdminMultiValue(value));
+    nodes.forEach(n=>{n.checked=selected.has(n.value);});
+  }else if(f.elements[name]) f.elements[name].value=value ?? '';
+}
+function adminCheckboxChoices(name,options){
+  return `<div class="admin-option-grid">${options.map(v=>`<label class="admin-option-check"><input type="checkbox" name="${name}" value="${escapeHtml(v)}"><span>${escapeHtml(v)}</span></label>`).join('')}</div>`;
+}
+
 function renderEditDynamicQuestions(details={}){
   const f=$('editForm');
   const ids=[...f.querySelectorAll('input[name="editEvent"]:checked')].map(x=>x.value);
   const blocks=[];
-  if(ids.includes('shlok')) blocks.push(`<div class="admin-detail-block"><h4>📖 Ganesh Shlok / Poem / Short Speech</h4><div class="form-grid"><label>What will be presented?<select name="speechType"><option value="">Select</option><option>Ganesh Shlok</option><option>Poem</option><option>Short Speech</option></select></label><label>Approx. duration<input name="speechDuration" placeholder="e.g. 2 minutes" /></label></div></div>`);
-  if(ids.includes('talentJunior') || ids.includes('talentSenior')) blocks.push(`<div class="admin-detail-block"><h4>🎭 MiCasaa Got Talent</h4><div class="form-grid"><label>Performance category<select name="talentCategory"><option value="">Select</option><option>Dance</option><option>Singing</option><option>Drama</option><option>Skit</option><option>Instrumental Music</option><option>Other</option></select></label><label>Participation type<select name="participationType"><option value="">Select</option><option>Solo</option><option>Duo</option><option>Group</option></select></label><label>Performance / act name<input name="performanceName" /></label><label>Approx. duration<input name="performanceDuration" /></label><label class="full">Group member names<textarea name="groupMembers"></textarea></label><label class="full">Special requirement<textarea name="specialRequirement"></textarea></label></div></div>`);
+  if(ids.includes('shlok')) blocks.push(`<div class="admin-detail-block"><h4>📖 Ganesh Shlok / Poem / Short Speech</h4><div class="form-grid"><div class="admin-choice-field full"><span class="admin-choice-label">What will be presented?</span><small>Select all that apply.</small>${adminCheckboxChoices('speechType',['Ganesh Shlok','Poem','Short Speech'])}</div><label>Approx. duration<input name="speechDuration" placeholder="e.g. 2 minutes" /></label></div></div>`);
+  if(ids.includes('talentJunior') || ids.includes('talentSenior')) blocks.push(`<div class="admin-detail-block"><h4>🎭 MiCasaa Got Talent</h4><div class="form-grid"><div class="admin-choice-field full"><span class="admin-choice-label">Performance category</span><small>Select one or more performance types.</small>${adminCheckboxChoices('talentCategory',['Dance','Singing','Drama','Skit','Instrumental Music','Other'])}</div><div class="admin-choice-field full"><span class="admin-choice-label">Participation type</span><small>Select all that apply across the performances.</small>${adminCheckboxChoices('participationType',['Solo','Duo','Group'])}</div><label>Performance / act name(s)<input name="performanceName" /></label><label>Approx. duration(s)<input name="performanceDuration" placeholder="e.g. Dance - 4 min, Singing - 3 min" /></label><label class="full">Group member names<textarea name="groupMembers"></textarea></label><label class="full">Special requirement<textarea name="specialRequirement"></textarea></label></div></div>`);
   if(ids.some(id=>['cricket','football','sackRace','lemonSpoon'].includes(id))) blocks.push(`<div class="admin-detail-block"><h4>🏅 Sports Day</h4><label>Team / partner details<textarea name="sportsTeamDetails"></textarea></label></div>`);
-  if(ids.includes('foodStall')) blocks.push(`<div class="admin-detail-block"><h4>🍽️ Food Stall</h4><div class="form-grid"><label>Stall / Display Name<input name="foodStallName" /></label><label>Food Category<select name="foodCategory"><option value="">Select</option><option>Snacks</option><option>Chaat</option><option>Main Course</option><option>Dessert / Sweets</option><option>Beverages</option><option>Healthy / Homemade</option><option>Other</option></select></label><label class="full">Items to sell / serve<textarea name="foodItems"></textarea></label></div><div class="admin-note"><strong>Note:</strong> Participants arrange their own table and power/electrical requirements.</div></div>`);
+  if(ids.includes('foodStall')) blocks.push(`<div class="admin-detail-block"><h4>🍽️ Food Stall</h4><div class="form-grid"><label>Stall / Display Name<input name="foodStallName" /></label><div class="admin-choice-field full"><span class="admin-choice-label">Food Category</span><small>Select all categories that apply.</small>${adminCheckboxChoices('foodCategory',['Snacks','Chaat','Main Course','Dessert / Sweets','Beverages','Healthy / Homemade','Other'])}</div><label class="full">Items to sell / serve<textarea name="foodItems"></textarea></label></div><div class="admin-note"><strong>Note:</strong> Participants arrange their own table and power/electrical requirements.</div></div>`);
   blocks.push(`<div class="admin-detail-block"><h4>📝 Committee Notes</h4><label>Notes<textarea name="notes"></textarea></label></div>`);
   $('editDynamicQuestions').innerHTML=blocks.join('');
-  for(const [key,value] of Object.entries(details||{})){
-    const el=f.elements[key]; if(el && value!==null && value!==undefined) el.value=value;
-  }
+  for(const [key,value] of Object.entries(details||{})) writeAdminDetailField(f,key,value);
 }
 
 function collectAdminDetails(){
-  const names=['speechType','speechDuration','talentCategory','participationType','performanceName','performanceDuration','groupMembers','specialRequirement','sportsTeamDetails','foodStallName','foodCategory','foodItems','notes'];
   const d={}; const f=$('editForm');
-  names.forEach(name=>{const el=f.elements[name]; if(el && String(el.value||'').trim()!=='') d[name]=String(el.value).trim();});
+  ADMIN_DETAIL_FIELD_NAMES.forEach(name=>{const value=readAdminDetailField(f,name); if(value) d[name]=value;});
   return d;
 }
 

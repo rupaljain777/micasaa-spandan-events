@@ -1,6 +1,6 @@
 # MiCasaa Ganesh Utsav 2026 — Cloudflare Pages + Supabase
 
-This is a mobile-first registration website for MiCasaa residents. It is designed for free static hosting on Cloudflare Pages and uses Supabase for registration storage.
+This is a mobile-first registration website for MiCasaa residents. It is designed for Cloudflare Pages and uses Supabase for registration storage. This version also includes a small Cloudflare Pages Function for a silent admin email notification after registration.
 
 ## What this version adds
 
@@ -94,7 +94,7 @@ Easy approach using GitHub:
 2. Upload all files from this folder to the repository root.
 3. In Cloudflare Dashboard open **Workers & Pages -> Create -> Pages -> Connect to Git**.
 4. Select the repository.
-5. This is a plain static site, so no build framework is required. Use the repository root as the output directory when Cloudflare asks for it.
+5. No build framework is required. Keep the `functions/` folder at the repository root so Cloudflare Pages deploys the admin-email endpoint along with the static site.
 6. Deploy.
 7. Cloudflare will give you a public HTTPS URL such as `your-project.pages.dev`.
 
@@ -131,6 +131,7 @@ The lookup uses participant name + wing + flat + mobile. This is suitable for a 
 - `config.js` — your Supabase Project URL and anon key
 - `supabase-setup.sql` — one-time database setup
 - `assets/micasaa-logo.png` — MiCasaa logo
+- `functions/api/admin-email.js` — server-side admin email notification (Cloudflare Pages Function)
 
 ---
 
@@ -259,11 +260,75 @@ The resident timeline now shows tentative timings for every festival event, plus
 - No Supabase/database changes are required for this visual update.
 
 
-## Free WhatsApp confirmation after registration
-After a successful new registration or update, the confirmation screen now shows the full registration summary and provides three free actions:
+## Mandatory WhatsApp confirmation after registration
+After every successful new registration or update, the confirmation screen shows the full registration summary and one required final action:
 
-- **Send to Committee on WhatsApp** - opens WhatsApp with a pre-filled message addressed to committee number **+91 9518960537**. The participant must tap **Send**.
-- **Send to My WhatsApp** - opens a pre-filled message addressed to the mobile number entered in the registration form. The participant must tap **Send**.
-- **Copy registration details** - copies the same confirmation text for saving or sharing elsewhere.
+- **Mandatory: Send to Committee on WhatsApp** - opens WhatsApp with a pre-filled message addressed to committee number **+91 9518960537**. The participant must tap **Send** in WhatsApp.
 
-This uses WhatsApp Click-to-Chat only. There is no paid WhatsApp API and no automatic outbound message. No Supabase SQL change is required for this feature.
+The previous **Send to My WhatsApp** and **Copy registration details** actions have been removed. The success dialog cannot be dismissed from the website until the committee WhatsApp button has been opened. After opening WhatsApp, the **Done** button is enabled.
+
+Important: a normal website cannot technically verify that the person pressed the final **Send** button inside WhatsApp. It can only require that the committee WhatsApp flow is opened before the website allows the success dialog to close.
+
+This uses WhatsApp Click-to-Chat only, so there is no paid WhatsApp API. No Supabase SQL change is required.
+
+
+## v13 multi-select update
+- MiCasaa Got Talent performance categories and participation types now use checkboxes, so a participant can select multiple performances (for example Dance + Singing, with Solo + Group if needed).
+- Ganesh Shlok / Poem / Short Speech presentation types now use checkboxes.
+- Food Stall categories now use checkboxes.
+- Sports event selection was already multi-select and remains checkbox-based.
+- Truly single-choice fields such as Wing and Age Group remain dropdowns. No radio buttons are used for multi-select questions.
+- Existing registrations remain compatible; multi-select values are stored as comma-separated text inside the existing details JSON, so no Supabase SQL migration is required.
+
+
+## v14 — Silent admin email notification
+
+The website now contains a server-side Cloudflare Pages Function at:
+
+`functions/api/admin-email.js`
+
+After Supabase successfully creates or updates a registration, the browser silently calls `/api/admin-email` with only the Registration ID. The server-side function then reads the authoritative registration record from Supabase and emails the full registration details to the configured admin address. Nothing on the resident website says that an email was sent.
+
+The email includes:
+- Registration ID
+- Participant name
+- Wing / flat
+- Age / age group
+- WhatsApp/mobile
+- Parent/guardian when provided
+- All selected events with dates and tentative timings
+- Shlok/Poem/Speech selections and duration
+- Got Talent performance categories, solo/duo/group, act names, duration, group members and requirements
+- Sports team/partner details
+- Food Stall name, categories and food items
+- Committee notes
+- Venue, Aarti timings and timing-update note
+- Photo/video consent and created/updated timestamps
+
+### Why this email can stay free
+Cloudflare Email Service allows sends to a **verified destination address** for free, even on the free plan. Because this project sends only to one fixed committee/admin inbox, configure that inbox as a verified destination address in your Cloudflare account. Cloudflare Pages Functions use the Workers free quota.
+
+You still need a domain already using Cloudflare DNS because Cloudflare requires the sender address to belong to one of your routing/sending domains. If you do not already own a domain, obtaining a domain itself is not free.
+
+### One-time Cloudflare email setup
+
+1. In Cloudflare Dashboard open **Compute / Email Service -> Email Routing -> Destination Addresses**.
+2. Add the committee/admin Gmail address you want to receive registration notifications and complete the verification email Cloudflare sends to it.
+3. Make sure you have a domain on Cloudflare DNS. Enable/onboard that domain for Cloudflare Email Service. Choose a sender such as `registrations@your-domain.com`.
+4. Create a Cloudflare API token with **Email Sending: Edit** permission. Keep the token secret.
+5. In **Workers & Pages -> your Pages project -> Settings -> Variables and Secrets**, add these Production variables/secrets:
+
+```text
+SUPABASE_URL                 = your Supabase Project URL
+SUPABASE_SERVICE_ROLE_KEY    = your Supabase sb_secret_... key (or legacy service_role key)
+CLOUDFLARE_ACCOUNT_ID        = your Cloudflare Account ID
+CLOUDFLARE_EMAIL_API_TOKEN   = the Email Sending API token
+EMAIL_FROM                   = registrations@your-domain.com
+ADMIN_EMAIL                  = the verified committee/admin email address
+```
+
+6. Store `SUPABASE_SERVICE_ROLE_KEY` and `CLOUDFLARE_EMAIL_API_TOKEN` as **secrets**, not plain values where possible.
+7. **Never** put either of those secrets in `config.js`, `script.js`, GitHub source, or any browser-visible file.
+8. Redeploy the Pages project after adding/changing the environment variables.
+
+The resident registration still succeeds if the email notification endpoint is temporarily unavailable; email delivery is intentionally not shown to the resident. For troubleshooting, use **Cloudflare Pages Function logs** rather than adding an email-status message to the website.
