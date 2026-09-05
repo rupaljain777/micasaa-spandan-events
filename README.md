@@ -257,3 +257,13 @@ The resident timeline now shows tentative timings for every festival event, plus
 - The rotating golden aura remains animated around the artwork.
 - The blessing panel is now a centered maroon-and-gold ceremonial plaque with Devanagari display typography.
 - No Supabase/database changes are required for this visual update.
+
+
+## Free WhatsApp confirmation after registration
+After a successful new registration or update, the confirmation screen now shows the full registration summary and provides three free actions:
+
+- **Send to Committee on WhatsApp** - opens WhatsApp with a pre-filled message addressed to committee number **+91 9518960537**. The participant must tap **Send**.
+- **Send to My WhatsApp** - opens a pre-filled message addressed to the mobile number entered in the registration form. The participant must tap **Send**.
+- **Copy registration details** - copies the same confirmation text for saving or sharing elsewhere.
+
+This uses WhatsApp Click-to-Chat only. There is no paid WhatsApp API and no automatic outbound message. No Supabase SQL change is required for this feature.
