@@ -1,18 +1,18 @@
 const CONFIG = window.MICASAA_CONFIG || {};
 
 const competitions = [
-  {id:'shlok', name:'Ganesh Shlok / Poem / Short Speech', date:'14 Sept'},
-  {id:'pakKala', name:'Pak Kala Competition', date:'15 Sept'},
-  {id:'foodStall', name:'Food Stall', date:'16 Sept'},
-  {id:'talentSenior', name:'MiCasaa Got Talent — Seniors', date:'18 Sept'},
-  {id:'drawing', name:'Drawing Competition', date:'19 Sept'},
-  {id:'talentJunior', name:'MiCasaa Got Talent — Juniors', date:'19 Sept'},
-  {id:'cricket', name:'Sports Day — Cricket', date:'20 Sept'},
-  {id:'football', name:'Sports Day — Football', date:'20 Sept'},
-  {id:'sackRace', name:'Sports Day — Sack Race', date:'20 Sept'},
-  {id:'lemonSpoon', name:'Sports Day — Lemon Spoon Race', date:'20 Sept'},
-  {id:'rangoli', name:'Rangoli Competition', date:'21 Sept'},
-  {id:'musicalChairs', name:'Musical Chairs', date:'23 Sept'}
+  {id:'shlok', name:'Ganesh Shlok / Poem / Short Speech', date:'14 Sept', time:'7 PM'},
+  {id:'pakKala', name:'Pak Kala Competition', date:'15 Sept', time:'6–7 PM'},
+  {id:'foodStall', name:'Food Stall', date:'17 Sept', time:'8 PM onwards'},
+  {id:'talentSenior', name:'MiCasaa Got Talent — Seniors', date:'18 Sept', time:'8 PM onwards'},
+  {id:'drawing', name:'Drawing Competition', date:'19 Sept', time:'1 PM onwards'},
+  {id:'talentJunior', name:'MiCasaa Got Talent — Juniors', date:'19 Sept', time:'8 PM onwards'},
+  {id:'cricket', name:'Sports Day — Cricket', date:'20 Sept', time:'10 AM onwards'},
+  {id:'football', name:'Sports Day — Football', date:'20 Sept', time:'10 AM onwards'},
+  {id:'sackRace', name:'Sports Day — Sack Race', date:'20 Sept', time:'10 AM onwards'},
+  {id:'lemonSpoon', name:'Sports Day — Lemon Spoon Race', date:'20 Sept', time:'10 AM onwards'},
+  {id:'rangoli', name:'Rangoli Competition', date:'21 Sept', time:'4 PM onwards'},
+  {id:'musicalChairs', name:'Musical Chairs', date:'23 Sept', time:'8 PM onwards'}
 ];
 
 const eventDetailConfig = {
@@ -117,7 +117,7 @@ function populateEventFilter(){
   $('eventFilter').innerHTML='<option value="">All events</option>'+competitions.map(c=>`<option value="${c.id}">${escapeHtml(c.name)}</option>`).join('');
   $('eventFilter').value=current;
   if($('reportEvent') && $('reportEvent').options.length<=1){
-    $('reportEvent').innerHTML='<option value="">Select an event</option>'+competitions.map(c=>`<option value="${c.id}">${escapeHtml(c.name)} — ${c.date}</option>`).join('');
+    $('reportEvent').innerHTML='<option value="">Select an event</option>'+competitions.map(c=>`<option value="${c.id}">${escapeHtml(c.name)} — ${c.date} · ${c.time}</option>`).join('');
   }
 }
 
@@ -140,7 +140,7 @@ function renderSummary(){
   $('kpiToday').textContent=today.toLocaleString('en-IN');
   const counts=Object.fromEntries(competitions.map(c=>[c.id,0]));
   allRows.forEach(r=>(r.event_ids||[]).forEach(id=>{if(id in counts) counts[id]++}));
-  $('eventSummary').innerHTML=competitions.map(c=>`<div class="event-stat"><span>${escapeHtml(c.name)} · ${c.date}</span><strong>${counts[c.id]||0}</strong></div>`).join('');
+  $('eventSummary').innerHTML=competitions.map(c=>`<div class="event-stat"><span>${escapeHtml(c.name)} · ${c.date} · ${c.time}</span><strong>${counts[c.id]||0}</strong></div>`).join('');
 }
 
 function renderRows(){
@@ -185,7 +185,7 @@ function openEdit(id){
   const r=allRows.find(x=>x.id===id); if(!r)return;
   const f=$('editForm'); f.elements.id.value=r.id; f.elements.participantName.value=r.participant_name; f.elements.flatNumber.value=r.flat_number; f.elements.wing.value=r.wing; f.elements.mobile.value=r.mobile; f.elements.age.value=r.age; f.elements.ageGroup.value=r.age_group; f.elements.guardianName.value=r.guardian_name||''; f.elements.photoConsent.checked=!!r.photo_consent;
   $('editRegistrationCode').textContent=`${r.registration_code} · Last updated ${fmtDate(r.updated_at)}`;
-  $('editEvents').innerHTML=competitions.map(c=>`<label class="event-check"><input type="checkbox" name="editEvent" value="${c.id}" ${(r.event_ids||[]).includes(c.id)?'checked':''}><span><strong>${escapeHtml(c.name)}</strong><br><small>${c.date}</small></span></label>`).join('');
+  $('editEvents').innerHTML=competitions.map(c=>`<label class="event-check"><input type="checkbox" name="editEvent" value="${c.id}" ${(r.event_ids||[]).includes(c.id)?'checked':''}><span><strong>${escapeHtml(c.name)}</strong><br><small>${c.date} · ${c.time}</small></span></label>`).join('');
   $('editEvents').querySelectorAll('input[name="editEvent"]').forEach(el=>el.addEventListener('change',()=>renderEditDynamicQuestions(collectAdminDetails())));
   renderEditDynamicQuestions(r.details||{});
   $('editError').hidden=true; $('editModal').hidden=false;
@@ -233,7 +233,7 @@ function generatePrintableReport(){
   const rows=eventRows(eventId); const cols=reportColumns(eventId);
   $('reportModalHeading').textContent=`${event.name} — Printable Report`;
   $('printEventName').textContent=event.name;
-  $('printEventDate').textContent=event.date + ' 2026';
+  $('printEventDate').textContent=`${event.date} 2026 · ${event.time} (Tentative)`;
   $('printGeneratedAt').textContent=`Generated ${new Date().toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}`;
   $('printTotal').textContent=`Total Registrations: ${rows.length}`;
   $('printReportTable').querySelector('thead').innerHTML=`<tr>${cols.map(c=>`<th class="${c.cls||''}">${escapeHtml(c.label)}</th>`).join('')}</tr>`;

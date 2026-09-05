@@ -6,6 +6,9 @@
   <meta name="theme-color" content="#7f1237" />
   <title>MiCasaa Ganesh Utsav 2026 — Competition Registration</title>
   <meta name="description" content="Register for MiCasaa Ganesh Utsav 2026 competitions and activities organised by Micasaa Spandan Committee." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Yatra+One&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -37,21 +40,31 @@
         </div>
         <div class="hero-cta">
           <a class="primary-btn large" href="#register" data-i18n="registerCompetitions">Register for Competitions</a>
-          <div class="microcopy" data-i18n="microcopy">One form · Multiple events · Mobile friendly</div>
         </div>
       </div>
       <div class="hero-art" aria-hidden="true">
-        <div class="mandala"></div>
-        <div class="ganesha-symbol">ॐ</div>
-        <div class="modak-card">🙏<strong>Ganpati Bappa Morya!</strong><span>Let your talent shine this Utsav.</span></div>
+        <div class="divine-bappa-wrap">
+          <div class="divine-aura aura-outer"></div>
+          <div class="divine-aura aura-inner"></div>
+          <div class="divine-rays"></div>
+          <img src="assets/ganpati-reference-mirrored-crop.png" alt="" class="divine-bappa" />
+          <span class="divine-sparkle s1">✦</span>
+          <span class="divine-sparkle s2">✧</span>
+          <span class="divine-sparkle s3">✦</span>
+          <span class="divine-sparkle s4">✧</span>
+        </div>
+        <div class="modak-card festive-blessing" aria-label="गणपति बप्पा मोरया">
+          <strong>॥ गणपति बप्पा मोरया ॥</strong>
+          <span>इस उत्सव में अपनी प्रतिभा का रंग बिखेरें</span>
+        </div>
       </div>
     </section>
 
     <section class="info-strip">
-      <div><strong data-i18n="venue">📍 Venue</strong><span>MiCasaa Society</span></div>
+      <div><strong data-i18n="venue">📍 Venue</strong><span data-i18n="venueValue">MiCasaa Club House</span></div>
       <div><strong data-i18n="forLabel">👨‍👩‍👧‍👦 For</strong><span data-i18n="residents">MiCasaa Residents</span></div>
       <div><strong data-i18n="registrationLabel">📝 Registration</strong><span data-i18n="registrationOpen">Open for listed competitions</span></div>
-      <div><strong data-i18n="updates">📣 Updates</strong><span data-i18n="timingsSeparate">Timings will be shared separately</span></div>
+      <div><strong data-i18n="updates">📣 Updates</strong><span data-i18n="timingsSeparate">Tentative timings shown below · Final updates may be shared 1 day before on society WhatsApp group.</span></div>
     </section>
 
     <section id="schedule" class="section schedule-section">
@@ -61,6 +74,17 @@
           <h2 data-i18n="festivalTimeline">Festival Timeline</h2>
         </div>
         <p data-i18n-html="registrationMarked">Registration is required only for competition / participation events marked <span class="pill">Register</span>.</p>
+      </div>
+      <div class="schedule-notices">
+        <div class="aarti-banner">
+          <div class="aarti-title">🪔 <span data-i18n="dailyAarti">Daily Aarti</span></div>
+          <div class="aarti-times">
+            <span><strong data-i18n="morningAarti">Morning Aarti</strong> — 8:30 AM</span>
+            <span><strong data-i18n="eveningAartiWeekdays">Evening Aarti (weekdays)</strong> — 8 PM</span>
+            <span><strong data-i18n="eveningAartiWeekends">Evening Aarti (weekends)</strong> — 7:30 PM</span>
+          </div>
+        </div>
+        <div class="tentative-time-note">ℹ️ <span data-i18n="tentativeTimeNote">All event timings are tentative and may be updated 1 day before the event.</span></div>
       </div>
       <div id="timeline" class="timeline"></div>
     </section>

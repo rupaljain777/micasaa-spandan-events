@@ -200,7 +200,7 @@ The registrations table stays unavailable to anonymous visitors. The public regi
 
 
 ## Food Stall registration
-Food Stall registration is included for 16 Sept. Residents can provide stall name, category, and planned items. The form also clearly notes that participants must arrange their own table and any power/electrical requirements. The admin dashboard can filter and count Food Stall registrations.
+Food Stall registration is included for 17 Sept. Residents can provide stall name, category, and planned items. The form also clearly notes that participants must arrange their own table and any power/electrical requirements. The admin dashboard can filter and count Food Stall registrations.
 
 ## Event-wise Printable Reports
 The Admin Dashboard now includes **Event-wise Printable Report**.
@@ -222,7 +222,7 @@ No additional Supabase SQL change is required for this report feature; it uses t
 
 ## September 2026 resident-experience update
 - Wings available in registration and admin: **C1, C2, D, E, F, G**.
-- **Shriram-Janaki Mahila Bhajni Mandal** replaces the previous 17 Sept bhajan-mandal name.
+- **Shriram-Janaki Mahila Bhajni Mandal** is scheduled for 16 Sept.
 - MiCasaa Got Talent schedule is now **Seniors on 18 Sept** and **Juniors on 19 Sept**.
 - The numbered 1/2/3 step indicator has been removed from the registration form.
 - Resident page supports **English, हिन्दी and मराठी** from the language selector in the header. The selection is remembered on that device.
@@ -239,3 +239,21 @@ The registration and admin pages use these age groups:
 - Senior Citizens: 60+ years
 
 On the resident registration page, the age group is automatically selected from the entered age to reduce errors.
+
+
+## v7 — Tentative event timings
+The resident timeline now shows tentative timings for every festival event, plus daily Morning Aarti at 8:30 AM and Evening Aarti at 8:00 PM. A clear note explains that timings may be updated one day before each event. Registration cards and admin printable reports also show the relevant event timings.
+
+
+## v8 display updates
+- Removed the hero microcopy “One form · Multiple events · Mobile friendly”.
+- Venue is now MiCasaa Club House.
+- Updates note says tentative timings are shown and final updates may be shared 1 day before on the society WhatsApp group.
+- Morning Aarti remains 8:30 AM.
+- Evening Aarti is 8:00 PM on weekdays and 7:30 PM on weekends.
+
+## v11 hero refinement
+- Right-side Ganpati artwork now uses a mirrored crop of the supplied devotional reference image.
+- The rotating golden aura remains animated around the artwork.
+- The blessing panel is now a centered maroon-and-gold ceremonial plaque with Devanagari display typography.
+- No Supabase/database changes are required for this visual update.
