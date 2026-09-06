@@ -4,7 +4,7 @@ const competitions = [
   {id:'shlok', name:'Ganesh Shlok / Poem / Short Speech', date:'14 Sept', time:'7 PM'},
   {id:'pakKala', name:'Pak Kala Competition', date:'15 Sept', time:'6–7 PM'},
   {id:'foodStall', name:'Food Stall', date:'17 Sept', time:'8 PM onwards'},
-  {id:'talentSenior', name:'MiCasaa Got Talent — Seniors (11 onwards)', date:'18 Sept', time:'8 PM onwards'},
+  {id:'talentSenior', name:'MiCasaa Got Talent — Seniors (Age 11 & above)', date:'18 Sept', time:'8 PM onwards'},
   {id:'drawing', name:'Drawing Competition', date:'19 Sept', time:'1 PM onwards'},
   {id:'talentJunior', name:'MiCasaa Got Talent — Juniors (Age 3 to 10)', date:'19 Sept', time:'8 PM onwards'},
   {id:'cricket', name:'Sports Day — Cricket', date:'20 Sept', time:'10 AM onwards'},

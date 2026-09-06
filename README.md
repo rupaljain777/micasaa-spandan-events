@@ -344,7 +344,7 @@ The resident registration still succeeds if the email notification endpoint is t
   - Senior Citizens: 60+
 - If a saved/draft age group conflicts with the entered age, the website corrects it automatically.
 - MiCasaa Got Talent labels now show eligibility:
-  - **Seniors (11 onwards)**
+  - **Seniors (Age 11 & above)**
   - **Juniors (Age 3 to 10)**
 - The admin edit form uses the same locked age-derived rule.
 - No Supabase schema change is required.
