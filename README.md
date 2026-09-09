@@ -224,7 +224,7 @@ No additional Supabase SQL change is required for this report feature; it uses t
 ## September 2026 resident-experience update
 - Wings available in registration and admin: **C1, C2, D, E, F, G**.
 - **Shriram-Janaki Mahila Bhajni Mandal** is scheduled for 16 Sept.
-- MiCasaa Got Talent schedule is now **Seniors on 18 Sept** and **Juniors on 19 Sept**.
+- MiCasaa Got Talent schedule is now **Senior Kids on 18 Sept** and **Junior Kids on 19 Sept**.
 - The numbered 1/2/3 step indicator has been removed from the registration form.
 - Resident page supports **English, हिन्दी and मराठी** from the language selector in the header. The selection is remembered on that device.
 - Form controls, checkboxes and buttons have larger tap targets and text for easier use, including by senior citizens.
@@ -243,7 +243,7 @@ On the resident registration page, the age group is automatically selected from 
 
 
 ## v7 — Tentative event timings
-The resident timeline now shows tentative timings for every festival event, plus daily Morning Aarti at 8:30 AM and Evening Aarti at 8:00 PM. A clear note explains that timings may be updated one day before each event. Registration cards and admin printable reports also show the relevant event timings.
+The resident timeline now shows tentative timings for every festival event, plus Morning Aarti at 8:30 AM, Evening Aarti at 8:00 PM Monday–Thursday, and Evening Aarti at 7:00 PM Friday–Sunday. A clear note explains that timings may be updated one day before each event. Registration cards and admin printable reports also show the relevant event timings.
 
 
 ## v8 display updates
@@ -251,7 +251,7 @@ The resident timeline now shows tentative timings for every festival event, plus
 - Venue is now MiCasaa Club House.
 - Updates note says tentative timings are shown and final updates may be shared 1 day before on the society WhatsApp group.
 - Morning Aarti remains 8:30 AM.
-- Evening Aarti is 8:00 PM on weekdays and 7:30 PM on weekends.
+- Evening Aarti is 8:00 PM Monday–Thursday and 7:00 PM Friday–Sunday.
 
 ## v11 hero refinement
 - Right-side Ganpati artwork now uses a mirrored crop of the supplied devotional reference image.
@@ -344,7 +344,25 @@ The resident registration still succeeds if the email notification endpoint is t
   - Senior Citizens: 60+
 - If a saved/draft age group conflicts with the entered age, the website corrects it automatically.
 - MiCasaa Got Talent labels now show eligibility:
-  - **Seniors (Age 11 & above)**
-  - **Juniors (Age 3 to 10)**
+  - **Senior Kids (Age 11 & above)**
+  - **Junior Kids (Age below 11)**
 - The admin edit form uses the same locked age-derived rule.
 - No Supabase schema change is required.
+
+
+## v17 event timeline update
+
+The resident timeline, registration cards, admin dashboard metadata and server-side confirmation email now use the final event schedule supplied for 14–25 September 2026.
+
+Key changes include:
+- Morning Aarti at 8:30 AM; Evening Aarti at 8 PM Monday–Thursday and 7 PM Friday–Sunday.
+- Ganpati Bappa Agaman at 12 PM onwards and Ganesh Shlok / Poem / Short Speech at 8 PM onwards on 14 Sept.
+- Musical Chairs moved to 16 Sept at 8 PM onwards.
+- Sack Race and Lemon Spoon Race moved to 19 Sept, 9–11 AM.
+- Senior Citizen Special Performance added on 19 Sept at 9 PM.
+- Sports Day updated to 20 Sept, 8–11 AM, with Cricket and Football outside on the turf.
+- 56 Bhog for Bappa added on 23 Sept at 7:30 PM.
+- Visarjan updated to 25 Sept at 5:30 PM onwards.
+- Satyanarayana Pooja remains on 22 Sept with no time displayed because no time was supplied.
+
+No Supabase schema change is required.

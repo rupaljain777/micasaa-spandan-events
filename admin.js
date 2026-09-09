@@ -1,18 +1,18 @@
 const CONFIG = window.MICASAA_CONFIG || {};
 
 const competitions = [
-  {id:'shlok', name:'Ganesh Shlok / Poem / Short Speech', date:'14 Sept', time:'7 PM'},
+  {id:'shlok', name:'Ganesh Shlok / Poem / Short Speech', date:'14 Sept', time:'8 PM onwards'},
   {id:'pakKala', name:'Pak Kala Competition', date:'15 Sept', time:'6–7 PM'},
+  {id:'musicalChairs', name:'Musical Chairs', date:'16 Sept', time:'8 PM onwards'},
   {id:'foodStall', name:'Food Stall', date:'17 Sept', time:'8 PM onwards'},
-  {id:'talentSenior', name:'MiCasaa Got Talent — Seniors (Age 11 & above)', date:'18 Sept', time:'8 PM onwards'},
+  {id:'talentSenior', name:'MiCasaa Got Talent — Senior Kids (Age 11 & above)', date:'18 Sept', time:'8 PM onwards'},
+  {id:'sackRace', name:'Sack Race', date:'19 Sept', time:'9–11 AM'},
+  {id:'lemonSpoon', name:'Lemon Spoon Race', date:'19 Sept', time:'9–11 AM'},
   {id:'drawing', name:'Drawing Competition', date:'19 Sept', time:'1 PM onwards'},
-  {id:'talentJunior', name:'MiCasaa Got Talent — Juniors (Age 3 to 10)', date:'19 Sept', time:'8 PM onwards'},
-  {id:'cricket', name:'Sports Day — Cricket', date:'20 Sept', time:'10 AM onwards'},
-  {id:'football', name:'Sports Day — Football', date:'20 Sept', time:'10 AM onwards'},
-  {id:'sackRace', name:'Sports Day — Sack Race', date:'20 Sept', time:'10 AM onwards'},
-  {id:'lemonSpoon', name:'Sports Day — Lemon Spoon Race', date:'20 Sept', time:'10 AM onwards'},
-  {id:'rangoli', name:'Rangoli Competition', date:'21 Sept', time:'4 PM onwards'},
-  {id:'musicalChairs', name:'Musical Chairs', date:'23 Sept', time:'8 PM onwards'}
+  {id:'talentJunior', name:'MiCasaa Got Talent — Junior Kids (Age below 11)', date:'19 Sept', time:'8 PM onwards'},
+  {id:'cricket', name:'Sports Day — Cricket', date:'20 Sept', time:'8–11 AM'},
+  {id:'football', name:'Sports Day — Football', date:'20 Sept', time:'8–11 AM'},
+  {id:'rangoli', name:'Rangoli Competition', date:'21 Sept', time:'4 PM onwards'}
 ];
 
 const eventDetailConfig = {

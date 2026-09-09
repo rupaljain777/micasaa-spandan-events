@@ -1,16 +1,16 @@
 const EVENT_META = {
-  shlok: { name: 'Ganesh Shlok / Poem / Short Speech', date: '14 Sept', time: '7 PM' },
+  shlok: { name: 'Ganesh Shlok / Poem / Short Speech', date: '14 Sept', time: '8 PM onwards' },
   pakKala: { name: 'Pak Kala Competition', date: '15 Sept', time: '6 to 7 PM' },
+  musicalChairs: { name: 'Musical Chairs', date: '16 Sept', time: '8 PM onwards' },
   foodStall: { name: 'Food Stall', date: '17 Sept', time: '8 PM onwards' },
-  talentSenior: { name: 'MiCasaa Got Talent - Senior', date: '18 Sept', time: '8 PM onwards' },
+  talentSenior: { name: 'MiCasaa Got Talent - Senior Kids (Age 11 & above)', date: '18 Sept', time: '8 PM onwards' },
+  sackRace: { name: 'Sack Race', date: '19 Sept', time: '9 to 11 AM' },
+  lemonSpoon: { name: 'Lemon Spoon Race', date: '19 Sept', time: '9 to 11 AM' },
   drawing: { name: 'Drawing Competition', date: '19 Sept', time: '1 PM onwards' },
-  talentJunior: { name: 'MiCasaa Got Talent - Junior', date: '19 Sept', time: '8 PM onwards' },
-  cricket: { name: 'Sports Day - Cricket', date: '20 Sept', time: '10 AM onwards' },
-  football: { name: 'Sports Day - Football', date: '20 Sept', time: '10 AM onwards' },
-  sackRace: { name: 'Sports Day - Sack Race', date: '20 Sept', time: '10 AM onwards' },
-  lemonSpoon: { name: 'Sports Day - Lemon Spoon Race', date: '20 Sept', time: '10 AM onwards' },
-  rangoli: { name: 'Rangoli Competition', date: '21 Sept', time: '4 PM onwards' },
-  musicalChairs: { name: 'Musical Chairs', date: '23 Sept', time: '8 PM onwards' }
+  talentJunior: { name: 'MiCasaa Got Talent - Junior Kids (Age below 11)', date: '19 Sept', time: '8 PM onwards' },
+  cricket: { name: 'Sports Day - Cricket', date: '20 Sept', time: '8 to 11 AM' },
+  football: { name: 'Sports Day - Football', date: '20 Sept', time: '8 to 11 AM' },
+  rangoli: { name: 'Rangoli Competition', date: '21 Sept', time: '4 PM onwards' }
 };
 
 const DETAIL_LABELS = {
@@ -89,8 +89,8 @@ function buildEmail(registration, action) {
     '',
     'Venue: MiCasaa Club House',
     'Morning Aarti: 8:30 AM',
-    'Evening Aarti (weekdays): 8 PM',
-    'Evening Aarti (weekends): 7:30 PM',
+    'Evening Aarti (Monday-Thursday): 8 PM',
+    'Evening Aarti (Friday-Saturday-Sunday): 7 PM',
     'Timings are tentative. Final updates may be shared 1 day before on the society WhatsApp group.',
     '',
     `Photo / Video consent: ${registration.photo_consent ? 'Yes' : 'No'}`,
@@ -105,7 +105,7 @@ function buildEmail(registration, action) {
     ? `<h3 style="margin:20px 0 8px;color:#7d1538">Additional Details</h3><table style="border-collapse:collapse;width:100%">${detailRows.map(([label, value]) => `<tr><td style="padding:7px 8px;border-bottom:1px solid #eee;font-weight:700;vertical-align:top">${escapeHtml(label)}</td><td style="padding:7px 8px;border-bottom:1px solid #eee">${escapeHtml(value)}</td></tr>`).join('')}</table>`
     : '';
 
-  const html = `<!doctype html><html><body style="font-family:Arial,sans-serif;color:#232323;background:#f8f3e8;padding:24px"><div style="max-width:720px;margin:auto;background:#fff;border:1px solid #ead8bf;border-radius:18px;overflow:hidden"><div style="padding:22px 26px;background:#7d1538;color:#fff"><h2 style="margin:0">MiCasaa Ganesh Utsav 2026</h2><p style="margin:6px 0 0">${isUpdated ? 'Registration Updated' : 'New Registration'}</p></div><div style="padding:24px 26px"><table style="border-collapse:collapse;width:100%"><tr><td style="padding:7px 8px;font-weight:700">Registration ID</td><td style="padding:7px 8px">${escapeHtml(registration.registration_code)}</td></tr><tr><td style="padding:7px 8px;font-weight:700">Participant</td><td style="padding:7px 8px">${escapeHtml(registration.participant_name)}</td></tr><tr><td style="padding:7px 8px;font-weight:700">Wing / Flat</td><td style="padding:7px 8px">${escapeHtml(registration.wing)}-${escapeHtml(registration.flat_number)}</td></tr><tr><td style="padding:7px 8px;font-weight:700">Age / Age Group</td><td style="padding:7px 8px">${escapeHtml(registration.age)} / ${escapeHtml(registration.age_group)}</td></tr><tr><td style="padding:7px 8px;font-weight:700">WhatsApp / Mobile</td><td style="padding:7px 8px">${escapeHtml(registration.mobile)}</td></tr>${registration.guardian_name ? `<tr><td style="padding:7px 8px;font-weight:700">Parent / Guardian</td><td style="padding:7px 8px">${escapeHtml(registration.guardian_name)}</td></tr>` : ''}</table><h3 style="margin:20px 0 8px;color:#7d1538">Registered Events</h3>${eventsHtml}${detailsHtml}<div style="margin-top:20px;padding:14px;background:#fff7df;border-radius:12px"><strong>Venue:</strong> MiCasaa Club House<br><strong>Morning Aarti:</strong> 8:30 AM<br><strong>Evening Aarti (weekdays):</strong> 8 PM<br><strong>Evening Aarti (weekends):</strong> 7:30 PM<br><span style="color:#6c6258">Timings are tentative. Final updates may be shared 1 day before on the society WhatsApp group.</span></div><p style="margin-top:20px;color:#6c6258;font-size:13px">Photo / Video consent: ${registration.photo_consent ? 'Yes' : 'No'}<br>Submitted: ${escapeHtml(registration.created_at || '')}<br>Last updated: ${escapeHtml(registration.updated_at || '')}</p></div></div></body></html>`;
+  const html = `<!doctype html><html><body style="font-family:Arial,sans-serif;color:#232323;background:#f8f3e8;padding:24px"><div style="max-width:720px;margin:auto;background:#fff;border:1px solid #ead8bf;border-radius:18px;overflow:hidden"><div style="padding:22px 26px;background:#7d1538;color:#fff"><h2 style="margin:0">MiCasaa Ganesh Utsav 2026</h2><p style="margin:6px 0 0">${isUpdated ? 'Registration Updated' : 'New Registration'}</p></div><div style="padding:24px 26px"><table style="border-collapse:collapse;width:100%"><tr><td style="padding:7px 8px;font-weight:700">Registration ID</td><td style="padding:7px 8px">${escapeHtml(registration.registration_code)}</td></tr><tr><td style="padding:7px 8px;font-weight:700">Participant</td><td style="padding:7px 8px">${escapeHtml(registration.participant_name)}</td></tr><tr><td style="padding:7px 8px;font-weight:700">Wing / Flat</td><td style="padding:7px 8px">${escapeHtml(registration.wing)}-${escapeHtml(registration.flat_number)}</td></tr><tr><td style="padding:7px 8px;font-weight:700">Age / Age Group</td><td style="padding:7px 8px">${escapeHtml(registration.age)} / ${escapeHtml(registration.age_group)}</td></tr><tr><td style="padding:7px 8px;font-weight:700">WhatsApp / Mobile</td><td style="padding:7px 8px">${escapeHtml(registration.mobile)}</td></tr>${registration.guardian_name ? `<tr><td style="padding:7px 8px;font-weight:700">Parent / Guardian</td><td style="padding:7px 8px">${escapeHtml(registration.guardian_name)}</td></tr>` : ''}</table><h3 style="margin:20px 0 8px;color:#7d1538">Registered Events</h3>${eventsHtml}${detailsHtml}<div style="margin-top:20px;padding:14px;background:#fff7df;border-radius:12px"><strong>Venue:</strong> MiCasaa Club House<br><strong>Morning Aarti:</strong> 8:30 AM<br><strong>Evening Aarti (Monday-Thursday):</strong> 8 PM<br><strong>Evening Aarti (Friday-Saturday-Sunday):</strong> 7 PM<br><span style="color:#6c6258">Timings are tentative. Final updates may be shared 1 day before on the society WhatsApp group.</span></div><p style="margin-top:20px;color:#6c6258;font-size:13px">Photo / Video consent: ${registration.photo_consent ? 'Yes' : 'No'}<br>Submitted: ${escapeHtml(registration.created_at || '')}<br>Last updated: ${escapeHtml(registration.updated_at || '')}</p></div></div></body></html>`;
 
   return { subject, text, html };
 }
